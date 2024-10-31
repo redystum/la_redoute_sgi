@@ -1,14 +1,14 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
 
 let cena = new THREE.Scene();
 
 let carregador = new GLTFLoader()
 carregador.load(
     './models/Sofa2.gltf',
-    function ( gltf ) {
-        cena.add( gltf.scene )
+    function (gltf) {
+        cena.add(gltf.scene)
     }
 )
 
@@ -17,8 +17,8 @@ let renderer = new THREE.WebGLRenderer({canvas: threeCanvas})
 renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight);
 renderer.setClearColor(0xefefef, 1);
 
-let camera = new THREE.PerspectiveCamera( 70, threeCanvas.clientWidth / threeCanvas.clientHeight, 0.1, 1000 )
-camera.position.set( 3/2, .5, 1/3 )
+let camera = new THREE.PerspectiveCamera(70, threeCanvas.clientWidth / threeCanvas.clientHeight, 0.1, 1000)
+camera.position.set(3 / 2, .5, 1 / 3)
 // camera.rotation.set(-1, 1.2, 1)
 camera.lookAt(0, 0, 0)
 
@@ -28,7 +28,25 @@ camera.lookAt(0, 0, 0)
 // let eixos = new THREE.AxesHelper()
 // cena.add( eixos )
 
-// new OrbitControls( camera, renderer.domElement )
+let isOrbitActive = false
+let orbit = new OrbitControls(camera, renderer.domElement)
+orbit.enableZoom = false
+orbit.enablePan = false
+orbit.target.set(0, 0, 0)
+orbit.minPolarAngle = Math.PI / 4
+orbit.maxPolarAngle = Math.PI / 2
+
+
+let btnOrbit = document.getElementById('orbitBtn')
+btnOrbit.addEventListener('click', () => {
+    isOrbitActive = !isOrbitActive
+    orbit.enabled = isOrbitActive
+    if (isOrbitActive)
+        btnOrbit.className = 'floatingBtn active'
+    else
+        btnOrbit.className = 'floatingBtn'
+
+})
 
 let delta = 0
 let relogio = new THREE.Clock()
@@ -43,7 +61,7 @@ function animar() {
     delta = delta % latencia_minima;
 }
 
-function luzes(){
+function luzes() {
     const luzAmbiente = new THREE.AmbientLight("lightblue", 0.5)
     cena.add(luzAmbiente)
 
