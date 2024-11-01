@@ -428,3 +428,53 @@ canvas {
 .floatingBtn.active {
     background: rgba(0, 0, 0, 0.3);
 }
+
+.artigoCardContainer a{
+    text-decoration: none;
+    color: black;
+}
+
+.artigoCard{
+    background: rgba(0, 0, 0, 0.05);
+    height: 250px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    transition: background 0.3s;
+
+    img{
+        width: 170px !important;
+        height: 170px !important;
+        object-fit: cover;
+    }
+
+    .footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #12151b;
+        margin: 15px 0;
+    }
+
+    span {
+        text-decoration: none;
+        color: black;
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &:hover{
+        background: rgba(0, 0, 0, 0.1);
+    }
+}
