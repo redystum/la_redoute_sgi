@@ -47,7 +47,7 @@ new GLTFLoader().load(
         ponto_luminoso.intensity = 3
         ponto_luminoso.distance = 1.25  // 0.125 metros
         cone_luminoso.intensity = 16
-        cone_luminoso.distance = 10     // 1 metro; ajustar consoante o pretendido 
+        cone_luminoso.distance = 10     // 1 metro; ajustar consoante o pretendido
         ponto_luminoso.color = cone_luminoso.color = cor_default // alterar cor da luz
         console.log(ponto_luminoso)
 
@@ -69,7 +69,7 @@ new GLTFLoader().load(
 {
     let delta = 0;
     let relogio = new THREE.Clock();
-    let latencia_minima = 1 / 60;    // para 60 frames por segundo 
+    let latencia_minima = 1 / 60;    // para 60 frames por segundo
     animar()
     function animar() {
         requestAnimationFrame(animar);
@@ -82,28 +82,3 @@ new GLTFLoader().load(
         delta = delta % latencia_minima;
     }
 }
-
-
-
-
-// Existing imports and code...
-
-// Function to resize the canvas and update the renderer
-function resizeCanvas() {
-    const threeCanvas = document.getElementById('three-canvas');
-    const width = window.innerWidth;
-    const height = window.innerHeight - 250;
-    threeCanvas.width = width;
-    threeCanvas.height = height;
-    renderer.setSize(width, height);
-    camara.aspect = width / height;
-    camara.updateProjectionMatrix();
-}
-
-// Initial resize to set the canvas size
-resizeCanvas();
-
-// Add event listener to resize the canvas on window resize
-window.addEventListener('resize', resizeCanvas);
-
-// Existing render/animate function...

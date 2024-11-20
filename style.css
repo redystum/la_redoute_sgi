@@ -53,15 +53,6 @@
     .md-show {
         display: none !important;
     }
-
-
-    .rounded-md-l-4 {
-        border-radius: 0 !important;
-    }
-
-    .rounded-md-r-4 {
-        border-radius: 0 !important;
-    }
 }
 
 @media (max-width: 480px) {
@@ -81,9 +72,19 @@
 
 }
 
-.screen-center {
+@media (max-width: 768px) {
+    .rounded-md-l-4 {
+        border-radius: 0 !important;
+    }
+
+    .rounded-md-r-4 {
+        border-radius: 0 !important;
+    }
+}
+
+.page-center {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -254,12 +255,13 @@ canvas {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.cardWrapper .bottom{
+
+.cardWrapper .bottom {
     display: flex;
     justify-content: center;
     align-items: end;
 
-    span{
+    span {
         text-decoration: line-through;
     }
 }
@@ -320,7 +322,7 @@ canvas {
 }
 
 
-.inspireseCard{
+.inspireseCard {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -331,6 +333,7 @@ canvas {
     position: relative;
 
     /* mascara copiada do site da laredoute.pt */
+
     .mask {
         position: absolute;
         left: 0;
@@ -338,33 +341,33 @@ canvas {
         right: 0;
         display: block;
         height: 100%;
-        background: -webkit-gradient(linear,left top,left bottom,from(rgba(25,27,33,0)),color-stop(55%,rgba(25,27,33,.05)),color-stop(80%,rgba(25,27,33,.4)),to(rgba(25,27,33,.6)));
-        background: -webkit-linear-gradient(top,rgba(25,27,33,0) 0%,rgba(25,27,33,.05) 55%,rgba(25,27,33,.4) 80%,rgba(25,27,33,.6) 100%);
-        background: -o-linear-gradient(top,rgba(25,27,33,0) 0%,rgba(25,27,33,.05) 55%,rgba(25,27,33,.4) 80%,rgba(25,27,33,.6) 100%);
-        background: linear-gradient(180deg,rgba(25,27,33,0) 0%,rgba(25,27,33,.05) 55%,rgba(25,27,33,.4) 80%,rgba(25,27,33,.6) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, from(rgba(25, 27, 33, 0)), color-stop(55%, rgba(25, 27, 33, .05)), color-stop(80%, rgba(25, 27, 33, .4)), to(rgba(25, 27, 33, .6)));
+        background: -webkit-linear-gradient(top, rgba(25, 27, 33, 0) 0%, rgba(25, 27, 33, .05) 55%, rgba(25, 27, 33, .4) 80%, rgba(25, 27, 33, .6) 100%);
+        background: -o-linear-gradient(top, rgba(25, 27, 33, 0) 0%, rgba(25, 27, 33, .05) 55%, rgba(25, 27, 33, .4) 80%, rgba(25, 27, 33, .6) 100%);
+        background: linear-gradient(180deg, rgba(25, 27, 33, 0) 0%, rgba(25, 27, 33, .05) 55%, rgba(25, 27, 33, .4) 80%, rgba(25, 27, 33, .6) 100%);
     }
 
-    .col-lg-4{
+    .col-lg-4 {
         display: flex;
         justify-content: center;
         align-items: end;
     }
 
-    .title{
+    .title {
         font-weight: bold;
         font-size: 24px;
     }
 
-    .subtitle{
+    .subtitle {
         font-size: 16px;
     }
 
-    .container-fluid{
+    .container-fluid {
         z-index: 5;
         margin-bottom: 20px;
     }
 
-    a{
+    a {
         text-decoration: none;
         color: black;
         background: #fff;
@@ -429,12 +432,12 @@ canvas {
     background: rgba(0, 0, 0, 0.3);
 }
 
-.artigoCardContainer a{
+.artigoCardContainer a {
     text-decoration: none;
     color: black;
 }
 
-.artigoCard{
+.artigoCard {
     background: rgba(0, 0, 0, 0.05);
     height: 250px;
     text-align: center;
@@ -442,13 +445,13 @@ canvas {
     border-radius: 10px;
     transition: background 0.3s;
 
-    img{
+    img {
         width: 170px !important;
         height: 170px !important;
         object-fit: cover;
     }
 
-    .footer{
+    .footer {
         display: flex;
         justify-content: space-between;
         align-items: start;
@@ -474,7 +477,32 @@ canvas {
         align-items: center;
     }
 
-    &:hover{
+    &:hover {
         background: rgba(0, 0, 0, 0.1);
+    }
+}
+
+footer .terms {
+    font-size: 12px;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 3rem;
+    }
+}
+
+.breadcrumb {
+
+    font-size: 14px;
+
+    a {
+        text-decoration: none;
+        color: grey
     }
 }
