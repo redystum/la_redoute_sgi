@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import * as SGI_Example from "./example_scene.min.js"
+// import * as SGI_Example from "./example_scene.min.js"
 
 // Malhas do modelo
 let suporte     // suporte do aplique, pode ser utilizado para posicionar o aplique na cena 3d

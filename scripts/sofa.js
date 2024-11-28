@@ -6,7 +6,7 @@ let cena = new THREE.Scene();
 
 let carregador = new GLTFLoader()
 carregador.load(
-    './models/Sofa2.gltf',
+    './models/sofa.gltf',
     function (gltf) {
         cena.add(gltf.scene)
     }
@@ -16,28 +16,45 @@ const threeCanvas = document.getElementById('three-canvas');
 let renderer = new THREE.WebGLRenderer({canvas: threeCanvas})
 renderer.setSize(threeCanvas.clientWidth, threeCanvas.clientHeight);
 renderer.setClearColor(0xefefef, 1);
+renderer.setPixelRatio(1.5);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+pmremGenerator.compileEquirectangularShader()
 
 let camera = new THREE.PerspectiveCamera(70, threeCanvas.clientWidth / threeCanvas.clientHeight, 0.1, 1000)
-camera.position.set(3 / 2, .5, 1 / 3)
+camera.position.set((3 / 2) * 5, .5 * 5, (1 / 3) * 5)
+// camera.position.set(3 / 2, .5, 1 / 3)
 // camera.rotation.set(-1, 1.2, 1)
 camera.lookAt(0, 0, 0)
 
-// let grelha = new THREE.GridHelper()
-// cena.add( grelha )
-//
-// let eixos = new THREE.AxesHelper()
-// cena.add( eixos )
+let grelha = new THREE.GridHelper()
+cena.add(grelha)
+
+let eixos = new THREE.AxesHelper()
+cena.add(eixos)
+
+let orbit = new OrbitControls(camera, renderer.domElement)
+// orbit.enableZoom = false
+// orbit.enablePan = false
+orbit.target.set(0, 0, 0)
+// orbit.minPolarAngle = Math.PI / 4
+// orbit.maxPolarAngle = Math.PI / 2
+
+orbit.enableDamping = true;
+orbit.autoRotate = true;
+orbit.autoRotateSpeed = 1;
+orbit.maxDistance = 30;
+orbit.minDistance = 10;
+orbit.zoomSpeed = 0.4;
+orbit.enablePan = false;
+
 
 let isOrbitActive = false
-let orbit = new OrbitControls(camera, renderer.domElement)
-orbit.enableZoom = false
-orbit.enablePan = false
-orbit.target.set(0, 0, 0)
-orbit.minPolarAngle = Math.PI / 4
-orbit.maxPolarAngle = Math.PI / 2
-
-
 let btnOrbit = document.getElementById('orbitBtn')
+// orbit.enabled = false;
 btnOrbit.addEventListener('click', () => {
     isOrbitActive = !isOrbitActive
     orbit.enabled = isOrbitActive
@@ -45,7 +62,6 @@ btnOrbit.addEventListener('click', () => {
         btnOrbit.className = 'floatingBtn active'
     else
         btnOrbit.className = 'floatingBtn'
-
 })
 
 let delta = 0
@@ -62,14 +78,17 @@ function animar() {
 }
 
 function luzes() {
-    const luzAmbiente = new THREE.AmbientLight("lightblue", 0.5)
-    cena.add(luzAmbiente)
+    const luzDirecional = new THREE.DirectionalLight("white", 1)
+    luzDirecional.position.set(1, 2, .5)
+    luzDirecional.target.position.set(0, 0, -1)
+    luzDirecional.castShadow = true
 
-    const luzPonto = new THREE.PointLight("white", 1)
-    luzPonto.position.set(1, 1, 1)
-    luzPonto.intensity = 2
-    cena.add(luzPonto)
+    luzDirecional.intensity = 2
+    cena.add(luzDirecional)
+    cena.add(luzDirecional.target)
 
+    const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
+    cena.add(lightHelper)
 }
 
 luzes();
