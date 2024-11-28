@@ -352,7 +352,7 @@ canvas {
 }
 
 .categoryCard {
-    background-image: url("./assets/sectionImage.jpg");
+    background-image: url("./assets/banners/sectionImage.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
