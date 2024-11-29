@@ -4785,7 +4785,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"Tan Weaved Fabric_Roughness",
-			"uri":"textures/sofa/Tan%20Weaved%20Fabric_Roughness.png"
+			"uri":"textures/sofa/Tan%20Weaved%20Fabric_Roughness.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
@@ -4800,7 +4800,7 @@
 		{
 			"mimeType":"image/png",
 			"name":"Fabric-40_smooth",
-			"uri":"textures/sofa/Fabric-40_smooth.png"
+			"uri":"textures/sofa/Fabric-40_smooth.jpg"
 		}
 	],
 	"accessors":[

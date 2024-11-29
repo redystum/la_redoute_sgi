@@ -4,68 +4,26 @@
 		"version":"2.0"
 	},
 	"extensionsUsed":[
-		"KHR_lights_punctual",
 		"KHR_materials_specular",
 		"KHR_materials_ior",
 		"KHR_texture_transform",
 		"KHR_materials_sheen"
 	],
 	"extensionsRequired":[
-		"KHR_lights_punctual",
 		"KHR_texture_transform"
 	],
-	"extensions":{
-		"KHR_lights_punctual":{
-			"lights":[
-				{
-					"color":[
-						1,
-						1,
-						1
-					],
-					"intensity":510.9032102523278,
-					"type":"point",
-					"name":"Point"
-				},
-				{
-					"color":[
-						1,
-						1,
-						1
-					],
-					"intensity":273018.0287280501,
-					"spot":{
-						"innerConeAngle":0.44080799473801235,
-						"outerConeAngle":0.5105087757110596
-					},
-					"type":"spot",
-					"name":"Spot.002"
-				}
-			]
-		}
-	},
 	"scene":0,
 	"scenes":[
 		{
-			"extras":{
-				"uuid":"7ca3e365-2b4a-44bc-9ff2-cb486836a6aa",
-				"assets reported":{
-					"5e213f8c-a5f6-4387-b6d8-2de2662fe061":true,
-					"eedad86f-6db9-44b1-8c13-6af46ac16a4f":true,
-					"c98db728-2d0a-4c02-8d58-8015ecd20381":true
-				}
-			},
 			"name":"Scene",
 			"nodes":[
+				10,
+				11,
 				12,
 				13,
 				14,
 				15,
-				16,
-				17,
-				18,
-				19,
-				20
+				16
 			]
 		}
 	],
@@ -89,25 +47,6 @@
 			]
 		},
 		{
-			"extensions":{
-				"KHR_lights_punctual":{
-					"light":0
-				}
-			},
-			"name":"Point",
-			"rotation":[
-				-0.7071068286895752,
-				0,
-				0,
-				0.7071068286895752
-			],
-			"translation":[
-				0,
-				-1.3749948740005493,
-				0.17395108938217163
-			]
-		},
-		{
 			"mesh":2,
 			"name":"S_LightBulb",
 			"rotation":[
@@ -123,31 +62,10 @@
 			]
 		},
 		{
-			"extensions":{
-				"KHR_lights_punctual":{
-					"light":1
-				}
-			},
-			"name":"Spot",
-			"rotation":[
-				-0.7010574340820312,
-				-0.09229596704244614,
-				-0.09229594469070435,
-				0.7010573744773865
-			],
-			"translation":[
-				0,
-				-0.11499417573213577,
-				0.17395158112049103
-			]
-		},
-		{
 			"children":[
 				0,
 				1,
-				2,
-				3,
-				4
+				2
 			],
 			"mesh":3,
 			"name":"AbajurJoint",
@@ -159,7 +77,7 @@
 		},
 		{
 			"children":[
-				5
+				3
 			],
 			"mesh":4,
 			"name":"ArmToAbajurJoint",
@@ -171,7 +89,7 @@
 		},
 		{
 			"children":[
-				6
+				4
 			],
 			"mesh":5,
 			"name":"ShortArm",
@@ -189,7 +107,7 @@
 		},
 		{
 			"children":[
-				7
+				5
 			],
 			"mesh":6,
 			"name":"LongArm",
@@ -207,7 +125,7 @@
 		},
 		{
 			"children":[
-				8
+				6
 			],
 			"mesh":7,
 			"name":"CircleJoint",
@@ -219,14 +137,14 @@
 		},
 		{
 			"children":[
-				9
+				7
 			],
 			"mesh":8,
 			"name":"SupportJoint"
 		},
 		{
 			"children":[
-				10
+				8
 			],
 			"mesh":9,
 			"name":"SupportJointHolder",
@@ -238,7 +156,7 @@
 		},
 		{
 			"children":[
-				11
+				9
 			],
 			"mesh":10,
 			"name":"Support",
@@ -361,69 +279,9 @@
 				-0.49215662479400635,
 				-1.5506633520126343
 			]
-		},
-		{
-			"camera":0,
-			"name":"Camera",
-			"rotation":[
-				-0.048817072063684464,
-				0.5668445229530334,
-				0.03367680683732033,
-				0.8216873407363892
-			],
-			"translation":[
-				23.629438400268555,
-				7.122425079345703,
-				5.946016788482666
-			]
-		},
-		{
-			"mesh":17,
-			"name":"Cube",
-			"scale":[
-				17.147537231445312,
-				17.147537231445312,
-				17.147537231445312
-			],
-			"translation":[
-				-4.897470951080322,
-				-1.6325654983520508,
-				-9.463560104370117
-			]
-		}
-	],
-	"cameras":[
-		{
-			"name":"Camera",
-			"perspective":{
-				"aspectRatio":1.7777777777777777,
-				"yfov":0.39959652046304894,
-				"zfar":1000,
-				"znear":0.10000000149011612
-			},
-			"type":"perspective"
 		}
 	],
 	"animations":[
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":10,
-						"path":"rotation"
-					}
-				}
-			],
-			"name":"SupportJointAction",
-			"samplers":[
-				{
-					"input":92,
-					"interpolation":"LINEAR",
-					"output":93
-				}
-			]
-		},
 		{
 			"channels":[
 				{
@@ -434,31 +292,12 @@
 					}
 				}
 			],
-			"name":"LongArmAction",
+			"name":"SupportJointAction",
 			"samplers":[
 				{
-					"input":92,
+					"input":88,
 					"interpolation":"LINEAR",
-					"output":94
-				}
-			]
-		},
-		{
-			"channels":[
-				{
-					"sampler":0,
-					"target":{
-						"node":7,
-						"path":"rotation"
-					}
-				}
-			],
-			"name":"ShortArmAction",
-			"samplers":[
-				{
-					"input":92,
-					"interpolation":"LINEAR",
-					"output":95
+					"output":89
 				}
 			]
 		},
@@ -472,12 +311,12 @@
 					}
 				}
 			],
-			"name":"ArmToAbajurJointAction.001",
+			"name":"LongArmAction",
 			"samplers":[
 				{
-					"input":92,
+					"input":88,
 					"interpolation":"LINEAR",
-					"output":96
+					"output":90
 				}
 			]
 		},
@@ -491,12 +330,50 @@
 					}
 				}
 			],
+			"name":"ShortArmAction",
+			"samplers":[
+				{
+					"input":88,
+					"interpolation":"LINEAR",
+					"output":91
+				}
+			]
+		},
+		{
+			"channels":[
+				{
+					"sampler":0,
+					"target":{
+						"node":4,
+						"path":"rotation"
+					}
+				}
+			],
+			"name":"ArmToAbajurJointAction.001",
+			"samplers":[
+				{
+					"input":88,
+					"interpolation":"LINEAR",
+					"output":92
+				}
+			]
+		},
+		{
+			"channels":[
+				{
+					"sampler":0,
+					"target":{
+						"node":3,
+						"path":"rotation"
+					}
+				}
+			],
 			"name":"AbajurJointAction",
 			"samplers":[
 				{
-					"input":92,
+					"input":88,
 					"interpolation":"LINEAR",
-					"output":97
+					"output":93
 				}
 			]
 		}
@@ -573,9 +450,6 @@
 		},
 		{
 			"doubleSided":true,
-			"extras":{
-				"blenderkit":{}
-			},
 			"name":"Material",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
@@ -596,240 +470,6 @@
 				},
 				"KHR_materials_ior":{
 					"ior":1.4500000476837158
-				}
-			},
-			"extras":{
-				"blenderkit":{
-					"category":7,
-					"name":"Fabric 40 Dark Grey",
-					"name_changed":1,
-					"name_old":"Fabric 40 Dark Grey",
-					"description":"A Dark Grey Knitted Fabric Woollen Weave texture in PBR. Wool texture complete with tiling. Fabric 40 Dark Grey",
-					"tags":"knitted, grey, gray, dark, weave, fabric, wool, pbr, woollen",
-					"thumbnail":"//fabric_40_dark_grey.png",
-					"has_thumbnail":1,
-					"thumbnail_scale":0.30000001192092896,
-					"thumbnail_samples":5,
-					"thumbnail_generating_state":"",
-					"is_generating_thumbnail":0,
-					"pbr":1,
-					"texture_resolution_max":0,
-					"texture_resolution_min":0,
-					"texture_count":0,
-					"node_count":0,
-					"total_megapixels":0,
-					"is_procedural":1,
-					"shaders":"",
-					"report":"",
-					"asset_base_id":"eedad86f-6db9-44b1-8c13-6af46ac16a4f",
-					"id":"b19614a5-5334-4af2-8889-d9bb0107f8a2",
-					"upload_state":"100% - Asset successfully uploaded.",
-					"uploading":0,
-					"texture_size_meters":0.25,
-					"thumbnail_generator_type":3
-				},
-				"yp":{
-					"active_ypaint_node":""
-				},
-				"asset_data":{
-					"thumbnail":"thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.512x512_q85_crop-%2C.png.webp",
-					"thumbnail_small":"thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.256x256_q85_crop-%2C.png.webp",
-					"downloaded":100,
-					"texture_size_meters":0.25,
-					"addonVersion":"3.9.0",
-					"assetBaseId":"eedad86f-6db9-44b1-8c13-6af46ac16a4f",
-					"assetType":"material",
-					"author":{
-						"aboutMe":"I am a Blender animator, modeller as well as a digital imaging specialist (Photoshop, since 1998).",
-						"aboutMeUrl":"https://www.turningturnip.co.uk",
-						"avatar128":"/avatar-redirect/f27f13f1-fabb-4c68-a841-9fda3c707246/128/",
-						"firstName":"James",
-						"fullName":"James Middleton",
-						"gravatarHash":"08d08063b99022fda90e8477a0b502f5",
-						"id":"33950",
-						"lastName":"Middleton",
-						"socialNetworks":[
-							{
-								"url":"https://www.youtube.com/@blenderbones",
-								"socialNetwork":{
-									"icon":"<i class=\"fab fa-youtube\" title=\"YouTube\"></i><span class=\"sr-only\">YouTube</span>",
-									"name":"YouTube",
-									"order":1
-								}
-							}
-						]
-					},
-					"canDownload":true,
-					"canDownloadError":true,
-					"category":"fabric",
-					"created":"2024-05-15T11:21:50.088105+02:00",
-					"description":"A Dark Grey Knitted Fabric Woollen Weave texture in PBR. Wool texture complete with tiling. Fabric 40 Dark Grey",
-					"dictParameters":{
-						"condition":"new",
-						"engine":"cycles",
-						"materialStyle":"realistic",
-						"megapixels":0,
-						"nodeCount":0,
-						"pbrType":"metallic",
-						"procedural":true,
-						"purePbr":true,
-						"sexualizedContent":false,
-						"shaders":[
-							""
-						],
-						"textureCount":0,
-						"textureSizeMeters":0.25,
-						"uv":false
-					},
-					"displayName":"Grey Fabric",
-					"files":[
-						{
-							"created":"2024-05-15T11:22:25.285847+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/387805/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"blend",
-							"modified":"2024-09-10T09:30:12.858950+02:00",
-							"resolution":0,
-							"url":"",
-							"filename":""
-						},
-						{
-							"created":"2024-05-16T09:42:12.970971+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/388081/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_0_5K",
-							"modified":"2024-09-10T09:30:12.877376+02:00",
-							"resolution":0,
-							"url":"",
-							"filename":""
-						},
-						{
-							"created":"2024-05-16T09:42:11.742186+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/388080/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_1K",
-							"modified":"2024-09-10T09:30:12.896368+02:00",
-							"resolution":0,
-							"url":"",
-							"filename":""
-						},
-						{
-							"created":"2024-05-16T09:42:10.288634+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/388079/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_2K",
-							"modified":"2024-09-10T09:30:12.917935+02:00",
-							"resolution":0,
-							"url":"https://public.blenderkit.com/public-assets/assets/b19614a553344af28889d9bb0107f8a2/files/resolution_2K_3a06955c-1378-4e50-9917-990297f21242.blend",
-							"filename":"",
-							"file_name":"C:\\xampp\\htdocs\\sgi\\la_redoute\\models\\assets\\materials\\fabric-40-dark-g_b19614a5-5334-4af2-8889-d9bb0107f8a2\\fabric-40-dark-grey_2K_3a06955c-1378-4e50-9917-990297f21242.blend"
-						},
-						{
-							"created":"2024-05-15T11:21:58.228875+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/387802/",
-							"fileThumbnail":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.96x96_q85_crop-%2C.png",
-							"fileThumbnailLarge":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.1024x1024_q85_crop-%2C.png",
-							"fileType":"thumbnail",
-							"modified":"2024-09-10T09:30:12.935759+02:00",
-							"resolution":0,
-							"url":"",
-							"filename":""
-						}
-					],
-					"filesSize":21225,
-					"id":"b19614a5-5334-4af2-8889-d9bb0107f8a2",
-					"isFree":true,
-					"isPrivate":false,
-					"lastBlendUpload":"2024-05-15T09:22:25.285847+00:00",
-					"lastGltfUpload":"",
-					"lastResolutionUpload":"2024-05-16T07:42:12.970971+00:00",
-					"lastThumbnailUpload":"2024-05-15T09:21:58.228875+00:00",
-					"lastUserInteraction":"2024-05-15T11:22:25.687087+02:00",
-					"lastVideoUpload":"",
-					"lastZipFileUpload":"",
-					"license":"royalty_free",
-					"name":"Fabric 40 Dark Grey",
-					"pk":92353,
-					"ratingsAverage":{
-						"bookmarks":0.9824561403508771,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.5
-					},
-					"ratingsCount":{
-						"bookmarks":57,
-						"competition-2022-votes":0,
-						"quality":2,
-						"virtualPrice":0,
-						"workingHours":1
-					},
-					"ratingsMedian":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.5
-					},
-					"ratingsSum":{
-						"bookmarks":56,
-						"competition-2022-votes":null,
-						"quality":16,
-						"score":40,
-						"virtualPrice":null,
-						"workingHours":0.5
-					},
-					"score":40,
-					"showMarketingLabels":true,
-					"sourceAppName":"blender",
-					"sourceAppVersion":"4.1.1",
-					"tags":[
-						"knitted",
-						"grey",
-						"gray",
-						"dark",
-						"weave",
-						"fabric",
-						"wool",
-						"pbr",
-						"woollen"
-					],
-					"thumbnailLargeUrl":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.1024x1024_q85_crop-%2C.png",
-					"thumbnailLargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.1024x1024_q85.png",
-					"thumbnailLargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.1024x1024_q85.png.webp?webp_generated=1725953415",
-					"thumbnailLargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.1024x1024_q85_crop-%2C.png.webp?webp_generated=1725953415",
-					"thumbnailMiddleUrl":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.512x512_q85_crop-%2C.png",
-					"thumbnailMiddleUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.512x512_q85.png",
-					"thumbnailMiddleUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.512x512_q85.png.webp?webp_generated=1725953415",
-					"thumbnailMiddleUrlWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.512x512_q85_crop-%2C.png.webp?webp_generated=1725953415",
-					"thumbnailSmallUrl":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.256x256_q85_crop-%2C.png",
-					"thumbnailSmallUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.256x256_q85.png",
-					"thumbnailSmallUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.256x256_q85.png.webp?webp_generated=1725953415",
-					"thumbnailSmallUrlWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.256x256_q85_crop-%2C.png.webp?webp_generated=1725953415",
-					"thumbnailXlargeUrl":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.2048x2048_q85_crop-%2C.png",
-					"thumbnailXlargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.2048x2048_q85.png",
-					"thumbnailXlargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.2048x2048_q85.png.webp?webp_generated=1725953415",
-					"thumbnailXlargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/b19614a553344af28889d9bb0107f8a2/files/thumbnail_46c78e2c-9591-4df0-9c4f-807be38e233f.png.2048x2048_q85_crop-%2C.png.webp?webp_generated=1725953415",
-					"url":"https://www.blenderkit.com/api/v1/assets/b19614a5-5334-4af2-8889-d9bb0107f8a2/",
-					"verificationStatus":"validated",
-					"versionNumber":1,
-					"webpGeneratedTimestamp":1725953415,
-					"available_resolutions":[
-						512,
-						1024,
-						2048
-					],
-					"max_resolution":2048,
-					"tooltip_data":{
-						"aname":"Grey Fabric",
-						"author_text":"by James Middleton",
-						"quality":"8"
-					},
-					"resolution":"resolution_2K"
 				}
 			},
 			"name":"Fabric 40 Dark Grey",
@@ -904,214 +544,6 @@
 					"ior":1.4500000476837158
 				}
 			},
-			"extras":{
-				"blenderkit":{
-					"category":6,
-					"name":"Procedural Carpet Fabric",
-					"name_changed":1,
-					"name_old":"Procedural Carpet Fabric",
-					"description":"A Procedurally generated fabric for carpets",
-					"tags":"Procedural, Carpet, Fabric, Carpet, Wool, Procedure, Nodes, Magic",
-					"uv":1,
-					"thumbnail_generator_type":3,
-					"thumbnail_resolution":2,
-					"adaptive_subdivision":1,
-					"is_generating_thumbnail":0,
-					"has_thumbnail":1,
-					"thumbnail_generating_state":"",
-					"thumbnail":"//Procedural Carpet Fabric_0001.png",
-					"texture_count":0,
-					"node_count":0,
-					"total_megapixels":0,
-					"is_procedural":1,
-					"shaders":"",
-					"texture_resolution_max":0,
-					"texture_resolution_min":0,
-					"upload_state":"Starting upload. Please don't close Blender until upload finishes",
-					"report":"",
-					"asset_base_id":"c98db728-2d0a-4c02-8d58-8015ecd20381",
-					"id":"9d6c21a5-e600-4f28-ba58-8bfbcf0f822e",
-					"uploading":0
-				},
-				"asset_data":{
-					"thumbnail":"thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.512x512_q85_crop-%2C.png.webp",
-					"thumbnail_small":"thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.256x256_q85_crop-%2C.png.webp",
-					"downloaded":100,
-					"texture_size_meters":1,
-					"addonVersion":"1.0.40",
-					"assetBaseId":"c98db728-2d0a-4c02-8d58-8015ecd20381",
-					"assetType":"material",
-					"author":{
-						"aboutMe":"I'm a Canadian graphic design student.",
-						"aboutMeUrl":"https://www.artstation.com/eatnoodls",
-						"avatar128":"/avatar-redirect/9e6a41e9-9132-4a1a-8e5f-895f6f426faa/128/",
-						"firstName":"eatnoodls",
-						"fullName":"eatnoodls ",
-						"gravatarHash":"98e58daaf60d6b26688289652a734fbc",
-						"id":"102778",
-						"lastName":"",
-						"socialNetworks":[
-							{
-								"url":"https://www.youtube.com/@eatnoodls",
-								"socialNetwork":{
-									"icon":"<i class=\"fab fa-youtube\" title=\"YouTube\"></i><span class=\"sr-only\">YouTube</span>",
-									"name":"YouTube",
-									"order":1
-								}
-							},
-							{
-								"url":"https://www.artstation.com/eatnoodls",
-								"socialNetwork":{
-									"icon":"<i class=\"fab fa-artstation\" title=\"ArtStation\"></i><span class=\"sr-only\">ArtStation</span>",
-									"name":"ArtStation",
-									"order":5
-								}
-							},
-							{
-								"url":"https://twitter.com/eatnoodls2",
-								"socialNetwork":{
-									"icon":"<i class=\"fab fa-x-twitter\" title=\"Twitter\"></i><span class=\"sr-only\">Twitter</span>",
-									"name":"Twitter",
-									"order":7
-								}
-							}
-						]
-					},
-					"canDownload":true,
-					"canDownloadError":true,
-					"category":"fabric",
-					"created":"2021-05-13T02:11:02.135641+02:00",
-					"description":"A Procedurally generated fabric for carpets",
-					"dictParameters":{
-						"animated":false,
-						"engine":"cycles",
-						"imageAltTextGen4v":"High-detail red procedural carpet texture for 3D modeling in Blender, suitable for PBR applications.",
-						"materialStyle":"realistic",
-						"megapixels":0,
-						"nodeCount":0,
-						"procedural":true,
-						"purePbr":false,
-						"sexualizedContent":false,
-						"shaders":[
-							""
-						],
-						"textureCount":0,
-						"textureSizeMeters":1,
-						"uv":true
-					},
-					"displayName":"Procedural Carpet Fabric",
-					"files":[
-						{
-							"created":"2021-05-13T02:11:14.236429+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/58772/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"blend",
-							"modified":"2021-05-13T02:11:16.833388+02:00",
-							"resolution":0,
-							"url":"https://public.blenderkit.com/public-assets/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/blend_dacef560-e307-4213-9267-9de00a50a1df.blend",
-							"filename":"",
-							"file_name":"C:\\xampp\\htdocs\\sgi\\la_redoute\\models\\assets\\materials\\procedural-carpe_9d6c21a5-e600-4f28-ba58-8bfbcf0f822e\\procedural-carpet-fabric_dacef560-e307-4213-9267-9de00a50a1df.blend"
-						},
-						{
-							"created":"2021-05-21T11:10:40.017410+02:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/59802/",
-							"fileThumbnail":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.96x96_q85_crop-%2C.png",
-							"fileThumbnailLarge":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.1024x1024_q85_crop-%2C.png",
-							"fileType":"thumbnail",
-							"modified":"2022-04-15T00:03:33.198940+02:00",
-							"resolution":0,
-							"url":"",
-							"filename":""
-						}
-					],
-					"filesSize":876,
-					"id":"9d6c21a5-e600-4f28-ba58-8bfbcf0f822e",
-					"isFree":true,
-					"isPrivate":false,
-					"lastBlendUpload":"2021-05-13T00:11:14.236429+00:00",
-					"lastGltfUpload":"",
-					"lastResolutionUpload":"",
-					"lastThumbnailUpload":"2021-05-21T09:10:40.017410+00:00",
-					"lastUserInteraction":"2021-05-13T02:11:16.194428+02:00",
-					"lastVideoUpload":"",
-					"lastZipFileUpload":"",
-					"license":"royalty_free",
-					"name":"Procedural Carpet Fabric",
-					"pk":16553,
-					"ratingsAverage":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":9.375,
-						"virtualPrice":null,
-						"workingHours":1
-					},
-					"ratingsCount":{
-						"bookmarks":44,
-						"competition-2022-votes":0,
-						"quality":8,
-						"virtualPrice":0,
-						"workingHours":6
-					},
-					"ratingsMedian":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":10,
-						"virtualPrice":null,
-						"workingHours":1
-					},
-					"ratingsSum":{
-						"bookmarks":44,
-						"competition-2022-votes":null,
-						"quality":75,
-						"score":93.75,
-						"virtualPrice":null,
-						"workingHours":8.7
-					},
-					"score":93.75,
-					"showMarketingLabels":true,
-					"sourceAppName":"blender",
-					"sourceAppVersion":"2.93.0",
-					"tags":[
-						"Procedural",
-						"Carpet",
-						"Fabric",
-						"Carpet",
-						"Wool",
-						"Procedure",
-						"Nodes",
-						"Magic"
-					],
-					"thumbnailLargeUrl":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.1024x1024_q85_crop-%2C.png",
-					"thumbnailLargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.1024x1024_q85.png",
-					"thumbnailLargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.1024x1024_q85.png.webp?webp_generated=1649973970",
-					"thumbnailLargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.1024x1024_q85_crop-%2C.png.webp?webp_generated=1649973970",
-					"thumbnailMiddleUrl":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.512x512_q85_crop-%2C.png",
-					"thumbnailMiddleUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.512x512_q85.png",
-					"thumbnailMiddleUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.512x512_q85.png.webp?webp_generated=1649973970",
-					"thumbnailMiddleUrlWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.512x512_q85_crop-%2C.png.webp?webp_generated=1649973970",
-					"thumbnailSmallUrl":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.256x256_q85_crop-%2C.png",
-					"thumbnailSmallUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.256x256_q85.png",
-					"thumbnailSmallUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.256x256_q85.png.webp?webp_generated=1649973970",
-					"thumbnailSmallUrlWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.256x256_q85_crop-%2C.png.webp?webp_generated=1649973970",
-					"thumbnailXlargeUrl":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.2048x2048_q85_crop-%2C.png",
-					"thumbnailXlargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.2048x2048_q85.png",
-					"thumbnailXlargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.2048x2048_q85.png.webp?webp_generated=1649973970",
-					"thumbnailXlargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/9d6c21a5e6004f28ba588bfbcf0f822e/files/thumbnail_88c61872-ffa2-46b6-a285-a4660b37292b.png.2048x2048_q85_crop-%2C.png.webp?webp_generated=1649973970",
-					"url":"https://www.blenderkit.com/api/v1/assets/9d6c21a5-e600-4f28-ba58-8bfbcf0f822e/",
-					"verificationStatus":"validated",
-					"versionNumber":1,
-					"webpGeneratedTimestamp":1649973970,
-					"available_resolutions":[],
-					"max_resolution":0,
-					"tooltip_data":{
-						"aname":"Procedural Carpet Fabric",
-						"author_text":"by eatnoodls ",
-						"quality":"9"
-					},
-					"resolution":"resolution_2K"
-				}
-			},
 			"name":"Procedural Carpet Fabric",
 			"pbrMetallicRoughness":{
 				"metallicFactor":0
@@ -1119,241 +551,6 @@
 		},
 		{
 			"doubleSided":true,
-			"extras":{
-				"blenderkit":{
-					"texture_size_meters":0.5,
-					"pbr":1,
-					"thumbnail_generator_type":1,
-					"thumbnail_resolution":3,
-					"thumbnail_scale":0.5,
-					"thumbnail":"/var/folders/zl/d9kqfc7s2fs65bp5x4gkl4nm0000gn/T/tmpzwt9_sw3/material.png",
-					"has_thumbnail":1,
-					"thumbnail_generating_state":"",
-					"is_generating_thumbnail":0,
-					"name":"Tan Weaved Fabric",
-					"name_changed":1,
-					"name_old":"Tan Weaved Fabric",
-					"description":"tan weaved fabric for boxes, bins, containers and chairs.",
-					"tags":"tan, fabric, weaved, outside, chair, bin",
-					"category":7,
-					"texture_resolution_max":4096,
-					"texture_resolution_min":4096,
-					"texture_count":4,
-					"node_count":13,
-					"total_megapixels":64,
-					"is_procedural":0,
-					"shaders":"principled, ",
-					"report":"",
-					"asset_base_id":"5e213f8c-a5f6-4387-b6d8-2de2662fe061",
-					"id":"401c0bff-f1aa-4582-bf2c-dae9557f3a1e",
-					"uploading":0
-				},
-				"asset_data":{
-					"addonVersion":"3.10.1",
-					"assetBaseId":"5e213f8c-a5f6-4387-b6d8-2de2662fe061",
-					"assetType":"material",
-					"author":{
-						"aboutMe":"",
-						"aboutMeUrl":"https://foobar404.dev",
-						"avatar128":"/avatar-redirect/bf286892-4ee9-4066-a057-1f3eeff250fb/128/",
-						"firstName":"Austin",
-						"fullName":"Austin Michaud",
-						"gravatarHash":"157e6fb72e26fc65dbe315e2b52fd81c",
-						"gravatarImg":"C:\\Users\\rffar\\AppData\\Local\\Temp\\bktemp_DESKTOPJ0V0JO5rffar\\bkit_g\\696907.jpg",
-						"id":"696907",
-						"lastName":"Michaud",
-						"socialNetworks":[],
-						"tooltip":"Austin Michaud\n\n"
-					},
-					"available_resolutions":[
-						512,
-						1024,
-						2048,
-						4096
-					],
-					"canDownload":true,
-					"canDownloadError":true,
-					"category":"flat-weave",
-					"created":"2024-02-01T20:10:17.941879+01:00",
-					"description":"tan weaved fabric for boxes, bins, containers and chairs.",
-					"dictParameters":{
-						"animated":false,
-						"engine":"cycles",
-						"imageAltTextGen4v":"High-resolution tan weaved fabric PBR texture suitable for 3D modeling in Blender and other software.",
-						"materialStyle":"realistic",
-						"megapixels":64,
-						"nodeCount":13,
-						"pbrType":"metallic",
-						"procedural":false,
-						"purePbr":true,
-						"sexualizedContent":false,
-						"shaders":[
-							"principled"
-						],
-						"textureCount":4,
-						"textureResolutionMax":4096,
-						"textureResolutionMin":4096,
-						"textureSizeMeters":0.5,
-						"uv":false
-					},
-					"displayName":"Tan Weaved Fabric",
-					"downloaded":0,
-					"files":[
-						{
-							"created":"2024-02-01T20:10:29.057503+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318648/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"blend",
-							"filename":"",
-							"modified":"2024-02-01T20:10:29.057522+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:02.564558+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318983/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_0_5K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:02.564578+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:01.805111+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318982/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_1K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:01.805127+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:01.221964+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318980/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_2K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:01.221988+01:00",
-							"resolution":0,
-							"url":"https://public.blenderkit.com/public-assets/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/resolution_2K_5f4a4b09-2c3c-424a-899e-e607b5a9db2a.blend",
-							"file_name":"C:\\xampp\\htdocs\\sgi\\la_redoute\\models\\assets\\materials\\tan-weaved-fabri_401c0bff-f1aa-4582-bf2c-dae9557f3a1e\\tan-weaved-fabric_2K_5f4a4b09-2c3c-424a-899e-e607b5a9db2a.blend"
-						},
-						{
-							"created":"2024-02-02T09:44:00.628952+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318979/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_4K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:00.628972+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-01T20:10:21.801899+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318647/",
-							"fileThumbnail":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.96x96_q85_crop-%2C.png",
-							"fileThumbnailLarge":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png",
-							"fileType":"thumbnail",
-							"filename":"",
-							"modified":"2024-02-01T20:10:21.801921+01:00",
-							"resolution":0,
-							"url":""
-						}
-					],
-					"filesSize":50999,
-					"id":"401c0bff-f1aa-4582-bf2c-dae9557f3a1e",
-					"isFree":true,
-					"isPrivate":false,
-					"lastBlendUpload":"2024-02-01T19:10:29.057503+00:00",
-					"lastGltfUpload":"",
-					"lastResolutionUpload":"2024-02-02T08:44:02.564558+00:00",
-					"lastThumbnailUpload":"2024-02-01T19:10:21.801899+00:00",
-					"lastUserInteraction":"2024-02-01T20:10:29.558675+01:00",
-					"lastVideoUpload":"",
-					"lastZipFileUpload":"",
-					"license":"royalty_free",
-					"max_resolution":4096,
-					"name":"Tan Weaved Fabric",
-					"pk":78987,
-					"ratingsAverage":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.6000000014901161
-					},
-					"ratingsCount":{
-						"bookmarks":31,
-						"competition-2022-votes":0,
-						"quality":2,
-						"virtualPrice":0,
-						"workingHours":2
-					},
-					"ratingsMedian":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.6000000014901161
-					},
-					"ratingsSum":{
-						"bookmarks":31,
-						"competition-2022-votes":null,
-						"quality":16,
-						"score":48.00000011920929,
-						"virtualPrice":null,
-						"workingHours":1.2000000029802322
-					},
-					"score":48.00000011920929,
-					"showMarketingLabels":true,
-					"sourceAppName":"blender",
-					"sourceAppVersion":"4.0.0",
-					"tags":[
-						"tan",
-						"fabric",
-						"weaved",
-						"outside",
-						"chair",
-						"bin"
-					],
-					"texture_size_meters":0.5,
-					"thumbnail":"thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png.webp",
-					"thumbnailLargeUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png",
-					"thumbnailLargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85.png",
-					"thumbnailLargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85.png.webp?webp_generated=1729778481",
-					"thumbnailLargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailMiddleUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png",
-					"thumbnailMiddleUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85.png",
-					"thumbnailMiddleUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85.png.webp?webp_generated=1729778481",
-					"thumbnailMiddleUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailSmallUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png",
-					"thumbnailSmallUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85.png",
-					"thumbnailSmallUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85.png.webp?webp_generated=1729778481",
-					"thumbnailSmallUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailXlargeUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85_crop-%2C.png",
-					"thumbnailXlargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85.png",
-					"thumbnailXlargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85.png.webp?webp_generated=1729778481",
-					"thumbnailXlargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnail_small":"thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png.webp",
-					"tooltip_data":{
-						"aname":"Tan Weaved Fabric",
-						"author_text":"by Austin Michaud",
-						"quality":"8"
-					},
-					"url":"https://www.blenderkit.com/api/v1/assets/401c0bff-f1aa-4582-bf2c-dae9557f3a1e/",
-					"verificationStatus":"validated",
-					"versionNumber":1,
-					"webpGeneratedTimestamp":1729778481,
-					"resolution":"resolution_2K"
-				}
-			},
 			"name":"Tan Weaved Fabric",
 			"normalTexture":{
 				"extensions":{
@@ -1409,241 +606,6 @@
 		},
 		{
 			"doubleSided":true,
-			"extras":{
-				"blenderkit":{
-					"texture_size_meters":0.5,
-					"pbr":1,
-					"thumbnail_generator_type":1,
-					"thumbnail_resolution":3,
-					"thumbnail_scale":0.5,
-					"thumbnail":"/var/folders/zl/d9kqfc7s2fs65bp5x4gkl4nm0000gn/T/tmpzwt9_sw3/material.png",
-					"has_thumbnail":1,
-					"thumbnail_generating_state":"",
-					"is_generating_thumbnail":0,
-					"name":"Tan Weaved Fabric",
-					"name_changed":1,
-					"name_old":"Tan Weaved Fabric",
-					"description":"tan weaved fabric for boxes, bins, containers and chairs.",
-					"tags":"tan, fabric, weaved, outside, chair, bin",
-					"category":7,
-					"texture_resolution_max":4096,
-					"texture_resolution_min":4096,
-					"texture_count":4,
-					"node_count":13,
-					"total_megapixels":64,
-					"is_procedural":0,
-					"shaders":"principled, ",
-					"report":"",
-					"asset_base_id":"5e213f8c-a5f6-4387-b6d8-2de2662fe061",
-					"id":"401c0bff-f1aa-4582-bf2c-dae9557f3a1e",
-					"uploading":0
-				},
-				"asset_data":{
-					"addonVersion":"3.10.1",
-					"assetBaseId":"5e213f8c-a5f6-4387-b6d8-2de2662fe061",
-					"assetType":"material",
-					"author":{
-						"aboutMe":"",
-						"aboutMeUrl":"https://foobar404.dev",
-						"avatar128":"/avatar-redirect/bf286892-4ee9-4066-a057-1f3eeff250fb/128/",
-						"firstName":"Austin",
-						"fullName":"Austin Michaud",
-						"gravatarHash":"157e6fb72e26fc65dbe315e2b52fd81c",
-						"gravatarImg":"C:\\Users\\rffar\\AppData\\Local\\Temp\\bktemp_DESKTOPJ0V0JO5rffar\\bkit_g\\696907.jpg",
-						"id":"696907",
-						"lastName":"Michaud",
-						"socialNetworks":[],
-						"tooltip":"Austin Michaud\n\n"
-					},
-					"available_resolutions":[
-						512,
-						1024,
-						2048,
-						4096
-					],
-					"canDownload":true,
-					"canDownloadError":true,
-					"category":"flat-weave",
-					"created":"2024-02-01T20:10:17.941879+01:00",
-					"description":"tan weaved fabric for boxes, bins, containers and chairs.",
-					"dictParameters":{
-						"animated":false,
-						"engine":"cycles",
-						"imageAltTextGen4v":"High-resolution tan weaved fabric PBR texture suitable for 3D modeling in Blender and other software.",
-						"materialStyle":"realistic",
-						"megapixels":64,
-						"nodeCount":13,
-						"pbrType":"metallic",
-						"procedural":false,
-						"purePbr":true,
-						"sexualizedContent":false,
-						"shaders":[
-							"principled"
-						],
-						"textureCount":4,
-						"textureResolutionMax":4096,
-						"textureResolutionMin":4096,
-						"textureSizeMeters":0.5,
-						"uv":false
-					},
-					"displayName":"Tan Weaved Fabric",
-					"downloaded":0,
-					"files":[
-						{
-							"created":"2024-02-01T20:10:29.057503+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318648/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"blend",
-							"filename":"",
-							"modified":"2024-02-01T20:10:29.057522+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:02.564558+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318983/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_0_5K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:02.564578+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:01.805111+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318982/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_1K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:01.805127+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-02T09:44:01.221964+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318980/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_2K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:01.221988+01:00",
-							"resolution":0,
-							"url":"https://public.blenderkit.com/public-assets/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/resolution_2K_5f4a4b09-2c3c-424a-899e-e607b5a9db2a.blend",
-							"file_name":"C:\\xampp\\htdocs\\sgi\\la_redoute\\models\\assets\\materials\\tan-weaved-fabri_401c0bff-f1aa-4582-bf2c-dae9557f3a1e\\tan-weaved-fabric_2K_5f4a4b09-2c3c-424a-899e-e607b5a9db2a.blend"
-						},
-						{
-							"created":"2024-02-02T09:44:00.628952+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318979/",
-							"fileThumbnail":"",
-							"fileThumbnailLarge":"",
-							"fileType":"resolution_4K",
-							"filename":"",
-							"modified":"2024-02-02T09:44:00.628972+01:00",
-							"resolution":0,
-							"url":""
-						},
-						{
-							"created":"2024-02-01T20:10:21.801899+01:00",
-							"downloadUrl":"https://www.blenderkit.com/api/v1/downloads/318647/",
-							"fileThumbnail":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.96x96_q85_crop-%2C.png",
-							"fileThumbnailLarge":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png",
-							"fileType":"thumbnail",
-							"filename":"",
-							"modified":"2024-02-01T20:10:21.801921+01:00",
-							"resolution":0,
-							"url":""
-						}
-					],
-					"filesSize":50999,
-					"id":"401c0bff-f1aa-4582-bf2c-dae9557f3a1e",
-					"isFree":true,
-					"isPrivate":false,
-					"lastBlendUpload":"2024-02-01T19:10:29.057503+00:00",
-					"lastGltfUpload":"",
-					"lastResolutionUpload":"2024-02-02T08:44:02.564558+00:00",
-					"lastThumbnailUpload":"2024-02-01T19:10:21.801899+00:00",
-					"lastUserInteraction":"2024-02-01T20:10:29.558675+01:00",
-					"lastVideoUpload":"",
-					"lastZipFileUpload":"",
-					"license":"royalty_free",
-					"max_resolution":4096,
-					"name":"Tan Weaved Fabric",
-					"pk":78987,
-					"ratingsAverage":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.6000000014901161
-					},
-					"ratingsCount":{
-						"bookmarks":31,
-						"competition-2022-votes":0,
-						"quality":2,
-						"virtualPrice":0,
-						"workingHours":2
-					},
-					"ratingsMedian":{
-						"bookmarks":1,
-						"competition-2022-votes":null,
-						"quality":8,
-						"virtualPrice":null,
-						"workingHours":0.6000000014901161
-					},
-					"ratingsSum":{
-						"bookmarks":31,
-						"competition-2022-votes":null,
-						"quality":16,
-						"score":48.00000011920929,
-						"virtualPrice":null,
-						"workingHours":1.2000000029802322
-					},
-					"score":48.00000011920929,
-					"showMarketingLabels":true,
-					"sourceAppName":"blender",
-					"sourceAppVersion":"4.0.0",
-					"tags":[
-						"tan",
-						"fabric",
-						"weaved",
-						"outside",
-						"chair",
-						"bin"
-					],
-					"texture_size_meters":0.5,
-					"thumbnail":"thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png.webp",
-					"thumbnailLargeUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png",
-					"thumbnailLargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85.png",
-					"thumbnailLargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85.png.webp?webp_generated=1729778481",
-					"thumbnailLargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.1024x1024_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailMiddleUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png",
-					"thumbnailMiddleUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85.png",
-					"thumbnailMiddleUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85.png.webp?webp_generated=1729778481",
-					"thumbnailMiddleUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.512x512_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailSmallUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png",
-					"thumbnailSmallUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85.png",
-					"thumbnailSmallUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85.png.webp?webp_generated=1729778481",
-					"thumbnailSmallUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnailXlargeUrl":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85_crop-%2C.png",
-					"thumbnailXlargeUrlNonsquared":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85.png",
-					"thumbnailXlargeUrlNonsquaredWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85.png.webp?webp_generated=1729778481",
-					"thumbnailXlargeUrlWebp":"https://public.blenderkit.com/thumbnails/assets/401c0bfff1aa4582bf2cdae9557f3a1e/files/thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.2048x2048_q85_crop-%2C.png.webp?webp_generated=1729778481",
-					"thumbnail_small":"thumbnail_4331fdac-7cb5-4efe-aff8-d620ff69a633.png.256x256_q85_crop-%2C.png.webp",
-					"tooltip_data":{
-						"aname":"Tan Weaved Fabric",
-						"author_text":"by Austin Michaud",
-						"quality":"8"
-					},
-					"url":"https://www.blenderkit.com/api/v1/assets/401c0bff-f1aa-4582-bf2c-dae9557f3a1e/",
-					"verificationStatus":"validated",
-					"versionNumber":1,
-					"webpGeneratedTimestamp":1729778481,
-					"resolution":"resolution_2K"
-				}
-			},
 			"name":"Tan Weaved Fabric.001",
 			"normalTexture":{
 				"extensions":{
@@ -1976,19 +938,6 @@
 					},
 					"indices":87,
 					"material":9
-				}
-			]
-		},
-		{
-			"name":"Cube",
-			"primitives":[
-				{
-					"attributes":{
-						"POSITION":88,
-						"NORMAL":89,
-						"TEXCOORD_0":90
-					},
-					"indices":91
 				}
 			]
 		}
@@ -2805,40 +1754,6 @@
 		{
 			"bufferView":88,
 			"componentType":5126,
-			"count":12,
-			"max":[
-				1.9999998807907104,
-				1.9999998807907104,
-				2
-			],
-			"min":[
-				-1.1920928955078125e-07,
-				-1.1920928955078125e-07,
-				1.1920928955078125e-07
-			],
-			"type":"VEC3"
-		},
-		{
-			"bufferView":89,
-			"componentType":5126,
-			"count":12,
-			"type":"VEC3"
-		},
-		{
-			"bufferView":90,
-			"componentType":5126,
-			"count":12,
-			"type":"VEC2"
-		},
-		{
-			"bufferView":91,
-			"componentType":5123,
-			"count":18,
-			"type":"SCALAR"
-		},
-		{
-			"bufferView":92,
-			"componentType":5126,
 			"count":240,
 			"max":[
 				10
@@ -2849,31 +1764,31 @@
 			"type":"SCALAR"
 		},
 		{
+			"bufferView":89,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":90,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":91,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC4"
+		},
+		{
+			"bufferView":92,
+			"componentType":5126,
+			"count":240,
+			"type":"VEC4"
+		},
+		{
 			"bufferView":93,
-			"componentType":5126,
-			"count":240,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":94,
-			"componentType":5126,
-			"count":240,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":95,
-			"componentType":5126,
-			"count":240,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":96,
-			"componentType":5126,
-			"count":240,
-			"type":"VEC4"
-		},
-		{
-			"bufferView":97,
 			"componentType":5126,
 			"count":240,
 			"type":"VEC4"
@@ -3410,57 +2325,33 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":144,
-			"byteOffset":6183576,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":144,
-			"byteOffset":6183720,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":96,
-			"byteOffset":6183864,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":36,
-			"byteOffset":6183960,
-			"target":34963
-		},
-		{
-			"buffer":0,
 			"byteLength":960,
-			"byteOffset":6183996
+			"byteOffset":6183576
 		},
 		{
 			"buffer":0,
 			"byteLength":3840,
-			"byteOffset":6184956
+			"byteOffset":6184536
 		},
 		{
 			"buffer":0,
 			"byteLength":3840,
-			"byteOffset":6188796
+			"byteOffset":6188376
 		},
 		{
 			"buffer":0,
 			"byteLength":3840,
-			"byteOffset":6192636
+			"byteOffset":6192216
 		},
 		{
 			"buffer":0,
 			"byteLength":3840,
-			"byteOffset":6196476
+			"byteOffset":6196056
 		},
 		{
 			"buffer":0,
 			"byteLength":3840,
-			"byteOffset":6200316
+			"byteOffset":6199896
 		}
 	],
 	"samplers":[
@@ -3471,7 +2362,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":6204156,
+			"byteLength":6203736,
 			"uri":"ApliqueArticuladoPecaUnica.bin"
 		}
 	]
