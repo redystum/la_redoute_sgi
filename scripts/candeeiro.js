@@ -13,7 +13,7 @@ let lampada_esferica;
 let AbajurJoint, ArmToAbajurJoint, ShortArm, LongArm, SupportJoint;
 
 // Default Colors
-const cor_default = new THREE.Color("lightblue");
+const cor_default = new THREE.Color("white");
 
 // Sizes
 let width = document.getElementById("three-canvas-container").clientWidth;
@@ -57,12 +57,22 @@ pmremGenerator.compileEquirectangularShader();
 
 // Camera Setup
 let camara = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-camara.position.set(0, 2, 5);
-cena.add(camara);
-
+camara.position.set(9, 5.5, -.7);
+camara.lookAt(-0.6, 5, -5);
 // Orbit Controls
 const controls = new OrbitControls(camara, renderer.domElement);
 controls.enableDamping = true;
+controls.target.set(-0.6, 5, -5);
+controls.maxDistance = 30;
+controls.minDistance = 2;
+controls.zoomSpeed = 0.4;
+controls.maxPolarAngle = Math.PI / 1.75;
+controls.minPolarAngle = Math.PI / 7;
+controls.maxAzimuthAngle = Math.PI / 1.7;
+controls.minAzimuthAngle = -Math.PI / 9;
+controls.enablePan = false;
+
+cena.add(camara);
 
 // Composer and Outline Pass
 const outlinePass = new OutlinePass(
@@ -92,10 +102,10 @@ const Objects = [
     "ArmToAbajurJoint",
     "LongArm",
     "ShortArm",
-    "SupportJointHolder",
-    "CircleJoint", // the same for this
-    "SupportJoint", // and this
-    "Support",
+    "SupportJointHolder", // the same for this
+    "CircleJoint", // this
+    "SupportJoint", // and this one too
+    // "Support",
 ];
 
 function onPointerClick(event) {
@@ -121,7 +131,7 @@ function onPointerClick(event) {
         if (!clickedMesh.name.endsWith("Solo")) {
             return;
         }
-        if (clickedMesh.name === "CircleJointSolo" || clickedMesh.name === "SupportJointSolo") {
+        if (clickedMesh.name === "CircleJointSolo" || clickedMesh.name === "SupportJointSolo" || clickedMesh.name === "SupportJointHolderSolo") {
             outlinePass.selectedObjects = [cena.getObjectByName("CircleJointSolo"), cena.getObjectByName("SupportJointSolo")];
             document.getElementById("SupportJointSliderDiv").className = "sliderDiv active";
         } else if (clickedMesh.name === "AbajurSolo" || clickedMesh.name === "AbajurJointSolo") {
@@ -148,9 +158,9 @@ let transparentMaterial = new THREE.MeshBasicMaterial({
 });
 
 // Load and Prepare Model
-new GLTFLoader().load("./models/novo/ApliqueArticuladoPecaUnica.gltf", (gltf) => {
+new GLTFLoader().load("./models/ApliqueArticuladoPecaUnica.gltf", (gltf) => {
     gltf.scene.traverse((child) => {
-        if (child instanceof THREE.Mesh) {
+        if (child.isMesh) {
             child.receiveShadow = true;
             child.castShadow = true;
         }
@@ -179,8 +189,8 @@ new GLTFLoader().load("./models/novo/ApliqueArticuladoPecaUnica.gltf", (gltf) =>
     // Light Configuration
     const ponto_luminoso = cena.getObjectByName("Point");
     const cone_luminoso = cena.getObjectByName("Spot");
-    ponto_luminoso.intensity = 3;
-    ponto_luminoso.distance = 1.25;
+    ponto_luminoso.intensity = 300;
+    ponto_luminoso.distance = 1.25 * 1000;
     cone_luminoso.intensity = 16;
     cone_luminoso.distance = 10;
     ponto_luminoso.color = cone_luminoso.color = cor_default;
