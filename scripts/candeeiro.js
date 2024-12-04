@@ -10,7 +10,8 @@ import * as SGI_Example from "./example_scene.min.js";
 let suporte;
 let lampada_cilindrica;
 let lampada_esferica;
-let AbajurJoint, ArmToAbajurJoint, ShortArm, LongArm, SupportJoint;
+let AbajurJoint, ArmToAbajurJoint, ShortArm, LongArm, SupportJoint, Abajur, SupportJointHolder, CircleJoint;
+let WoodMaterial;
 
 // Default Colors
 const cor_default = new THREE.Color("white");
@@ -158,7 +159,7 @@ let transparentMaterial = new THREE.MeshBasicMaterial({
 });
 
 // Load and Prepare Model
-new GLTFLoader().load("./models/ApliqueArticuladoPecaUnica.gltf", (gltf) => {
+new GLTFLoader().load("./models/sofa_aplique.gltf", (gltf) => {
     gltf.scene.traverse((child) => {
         if (child.isMesh) {
             child.receiveShadow = true;
@@ -182,6 +183,9 @@ new GLTFLoader().load("./models/ApliqueArticuladoPecaUnica.gltf", (gltf) => {
             LongArm = cena.getObjectByName("LongArm");
             SupportJoint = cena.getObjectByName("SupportJoint");
         }
+        Abajur = cena.getObjectByName("Abajur");
+        SupportJointHolder = cena.getObjectByName("SupportJointHolder");
+        CircleJoint = cena.getObjectByName("CircleJoint");
     });
 
     suporte = cena.getObjectByName("Support");
@@ -202,11 +206,18 @@ new GLTFLoader().load("./models/ApliqueArticuladoPecaUnica.gltf", (gltf) => {
     lampada_esferica.visible = false;
     lampada_cilindrica.children[0].material.emissive = cor_default;
 
+    WoodMaterial = cena.getObjectByName("WoodMaterial").material;
 
-    // Directional Light
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(0, 1, 1);
-    cena.add(light);
+    const luzDirecional = new THREE.DirectionalLight("white", 1)
+    luzDirecional.position.set(-1,10,-4)
+    luzDirecional.target.position.set(-2,0,-2)
+    luzDirecional.intensity = 2
+    luzDirecional.castShadow = false
+    cena.add(luzDirecional)
+
+    const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
+    cena.add(lightHelper)
+
     setSoloObjectsPosition();
     updateSliders();
 });
@@ -292,3 +303,94 @@ supportJointSlider.addEventListener("input", updateRotation);
 
     animar();
 }
+
+const blackMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
+const whiteMaterial = new THREE.MeshBasicMaterial({color: 0xf1f1f1});
+
+$("#btn_abajur_black").click(function () {
+    if (Abajur) {
+        $(".abajurSection").removeClass("active");
+        $("#btn_abajur_black").addClass("active");
+        $("#abajurHeading span").text("Preto");
+        if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
+            console.log(Abajur.children[0]);
+            Abajur.children[0].material = blackMaterial;
+        }
+    }
+});
+
+$("#btn_abajur_white").click(function () {
+    if (Abajur) {
+        $(".abajurSection").removeClass("active");
+        $("#btn_abajur_white").addClass("active");
+        $("#abajurHeading span").text("Branco");
+        Abajur.material = whiteMaterial;
+        if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
+            console.log(Abajur.children[0]);
+            Abajur.children[0].material = whiteMaterial;
+        }
+    }
+});
+
+$("#btn_abajur_red").click(function () {
+    if (Abajur) {
+        $(".abajurSection").removeClass("active");
+        $("#btn_abajur_red").addClass("active");
+        $("#abajurHeading span").text("Vermelho");
+        Abajur.material = WoodMaterial;
+        if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
+            console.log(Abajur.children[0]);
+            Abajur.children[0].material = WoodMaterial;
+        }
+    }
+});
+
+$("#btn_arms_black").click(function () {
+    if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
+        $(".armsSection").removeClass("active");
+        $("#btn_arms_black").addClass("active");
+        $("#armsHeading span").text("Preto");
+        ShortArm.material = blackMaterial;
+        LongArm.material = blackMaterial;
+        CircleJoint.material = blackMaterial;
+        SupportJoint.material = blackMaterial;
+        ArmToAbajurJoint.material = blackMaterial;
+        AbajurJoint.material = blackMaterial;
+    }
+});
+
+$("#btn_arms_white").click(function () {
+    if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
+        $(".armsSection").removeClass("active");
+        $("#btn_arms_white").addClass("active");
+        $("#armsHeading span").text("Branco");
+        ShortArm.material = whiteMaterial;
+        LongArm.material = whiteMaterial;
+        CircleJoint.material = whiteMaterial;
+        SupportJoint.material = whiteMaterial;
+        ArmToAbajurJoint.material = whiteMaterial;
+        AbajurJoint.material = whiteMaterial;
+    }
+});
+
+$("#btn_support_black").click(function () {
+    if (suporte && SupportJointHolder) {
+        $(".supportSection").removeClass("active");
+        $("#btn_support_black").addClass("active");
+        $("#supportHeading span").text("Preto");
+        suporte.material = blackMaterial;
+        SupportJointHolder.material = blackMaterial;
+    }
+});
+
+$("#btn_support_white").click(function () {
+    if (suporte && SupportJointHolder) {
+        $(".supportSection").removeClass("active");
+        $("#btn_support_white").addClass("active");
+        $("#supportHeading span").text("Branco");
+        suporte.material = whiteMaterial;
+        SupportJointHolder.material = whiteMaterial;
+    }
+});
+
+

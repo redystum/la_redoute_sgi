@@ -6,7 +6,7 @@ let cena = new THREE.Scene();
 
 let carregador = new GLTFLoader()
 carregador.load(
-    './models/ApliqueArticuladoPecaUnica.gltf',
+    './models/sofa_aplique.gltf',
     function ( gltf ) {
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
@@ -38,18 +38,18 @@ carregador.load(
         // Light Configuration
         const ponto_luminoso = cena.getObjectByName("Point");
         const cone_luminoso = cena.getObjectByName("Spot");
-        ponto_luminoso.intensity = 300;
+        ponto_luminoso.intensity = 0;
         ponto_luminoso.distance = 1.25 * 1000;
-        cone_luminoso.intensity = 16;
+        cone_luminoso.intensity = 0;
         cone_luminoso.distance = 10;
-        ponto_luminoso.color = cone_luminoso.color = cor_default;
+        // ponto_luminoso.color = cone_luminoso.color = cor_default;
 
 
         // Configure Lamps
         let lampada_cilindrica = cena.getObjectByName("C_LightBulb");
         let lampada_esferica = cena.getObjectByName("S_LightBulb");
         lampada_esferica.visible = false;
-        lampada_cilindrica.children[0].material.emissive = cor_default;
+        // lampada_cilindrica.children[0].material.emissive = cor_default;
 
     }
 )
@@ -59,19 +59,30 @@ const threeContainer = document.getElementById('canvas-container');
 let renderer = new THREE.WebGLRenderer({canvas: threeCanvas})
 renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
 renderer.setClearColor(0xefefef, 1);
+renderer.setPixelRatio(1.5);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 
 let camera = new THREE.PerspectiveCamera( 70, threeContainer.clientWidth / threeContainer.clientHeight, 0.1, 1000 )
-camera.position.set( 4, 2, 1 )
+camera.position.set( 11, 5, 4 )
 // camera.rotation.set(-1, 1.2, 1)
-camera.lookAt(2, 1.5, 0)
+camera.lookAt(2, 2, 0)
 
 let isOrbitActive = false
 let orbit = new OrbitControls(camera, renderer.domElement)
+orbit.target.set(2, 2, 0)
 orbit.enableDamping = true;
 orbit.enablePan = false
-orbit.target.set(2, 1.5, 0)
-orbit.minPolarAngle = Math.PI / 4
-orbit.maxPolarAngle = Math.PI / 2
+orbit.maxDistance = 30;
+orbit.minDistance = 2;
+orbit.zoomSpeed = 0.4;
+orbit.maxPolarAngle = Math.PI / 1.75;
+orbit.minPolarAngle = Math.PI / 7;
+orbit.maxAzimuthAngle = Math.PI / 1.7;
+orbit.minAzimuthAngle = -Math.PI / 9;
 orbit.enabled = isOrbitActive
 
 
@@ -91,12 +102,11 @@ function luzes(){
     luzDirecional.position.set(1,10,1)
     luzDirecional.target.position.set(0,0,0)
     luzDirecional.intensity = 3
-    luzDirecional.castShadow = true
+    luzDirecional.castShadow = false
     cena.add(luzDirecional)
 
     const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
     cena.add(lightHelper)
-
 }
 
 luzes();
