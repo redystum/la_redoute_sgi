@@ -1,13 +1,13 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
 
 let cena = new THREE.Scene();
 
 let carregador = new GLTFLoader()
 carregador.load(
     './models/sofa_aplique.gltf',
-    function ( gltf ) {
+    function (gltf) {
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
                 child.receiveShadow = true;
@@ -56,7 +56,12 @@ carregador.load(
 
 const threeCanvas = document.getElementById('three-canvas');
 const threeContainer = document.getElementById('canvas-container');
-let renderer = new THREE.WebGLRenderer({canvas: threeCanvas})
+let renderer = new THREE.WebGLRenderer({
+    canvas: threeCanvas,
+    antialias: true,
+    powerPreference: "high-performance",
+    precision: "lowp",
+});
 renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
 renderer.setClearColor(0xefefef, 1);
 renderer.setPixelRatio(1.5);
@@ -65,9 +70,17 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+const geometry = new THREE.PlaneGeometry(100, 100);
+geometry.rotateX(-Math.PI / 2);
+geometry.translate(0, -1.63, 0);
+const material = new THREE.ShadowMaterial({opacity: 0.5});
+const plane = new THREE.Mesh(geometry, material);
+plane.receiveShadow = true;
+cena.add(plane);
 
-let camera = new THREE.PerspectiveCamera( 70, threeContainer.clientWidth / threeContainer.clientHeight, 0.1, 1000 )
-camera.position.set( 11, 5, 4 )
+
+let camera = new THREE.PerspectiveCamera(70, threeContainer.clientWidth / threeContainer.clientHeight, 0.1, 1000)
+camera.position.set(11, 5, 4)
 // camera.rotation.set(-1, 1.2, 1)
 camera.lookAt(2, 2, 0)
 
@@ -97,16 +110,33 @@ btnOrbit.addEventListener('click', () => {
 
 })
 
-function luzes(){
+function luzes() {
     const luzDirecional = new THREE.DirectionalLight("white", 1)
-    luzDirecional.position.set(1,10,1)
-    luzDirecional.target.position.set(0,0,0)
+    luzDirecional.position.set(-1, 5, -2)
+    luzDirecional.target.position.set(0, 0, 0)
     luzDirecional.intensity = 3
-    luzDirecional.castShadow = false
+    luzDirecional.castShadow = true;
+
+    luzDirecional.shadow.mapSize.width = 1024 * 4;
+
+    luzDirecional.shadow.mapSize.height = 1024 * 4;
+    luzDirecional.shadow.camera.near = 0.5;
+    luzDirecional.shadow.camera.far = 500;
+
     cena.add(luzDirecional)
+
+    const d = 100;
+
+    luzDirecional.shadow.camera.left = -d;
+    luzDirecional.shadow.camera.right = d;
+    luzDirecional.shadow.camera.top = d;
+    luzDirecional.shadow.camera.bottom = -d;
 
     const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
     cena.add(lightHelper)
+
+    const luzAmbiente = new THREE.AmbientLight(0xffffff, 1)
+    cena.add(luzAmbiente)
 }
 
 luzes();

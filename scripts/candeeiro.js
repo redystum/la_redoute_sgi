@@ -44,14 +44,28 @@ window.cena = cena;
 
 // Renderer Setup
 const threeCanvas = document.getElementById("three-canvas");
-let renderer = new THREE.WebGLRenderer({canvas: threeCanvas});
-renderer.setSize(width, height);
-renderer.setClearColor(0x5f5f5f, 1);
+let renderer = new THREE.WebGLRenderer({
+    canvas: threeCanvas,
+    antialias: true,
+    powerPreference: "high-performance",
+    precision: "lowp",
+});renderer.setSize(width, height);
+// renderer.setClearColor(0xefefef, 1);
 renderer.setPixelRatio(1.5);
+renderer.setClearColor(0x5f5f5f, 1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+
+const geometry = new THREE.PlaneGeometry(100, 100);
+geometry.rotateX(-Math.PI / 2);
+geometry.translate(0, -1.63, 0);
+const material = new THREE.ShadowMaterial({opacity: 0.5});
+const plane = new THREE.Mesh(geometry, material);
+plane.receiveShadow = true;
+cena.add(plane);
 
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 pmremGenerator.compileEquirectangularShader();
@@ -64,14 +78,14 @@ camara.lookAt(-0.6, 5, -5);
 const controls = new OrbitControls(camara, renderer.domElement);
 controls.enableDamping = true;
 controls.target.set(-0.6, 5, -5);
-controls.maxDistance = 30;
-controls.minDistance = 2;
-controls.zoomSpeed = 0.4;
-controls.maxPolarAngle = Math.PI / 1.75;
-controls.minPolarAngle = Math.PI / 7;
-controls.maxAzimuthAngle = Math.PI / 1.7;
-controls.minAzimuthAngle = -Math.PI / 9;
-controls.enablePan = false;
+// controls.maxDistance = 30;
+// controls.minDistance = 2;
+// controls.zoomSpeed = 0.4;
+// controls.maxPolarAngle = Math.PI / 1.75;
+// controls.minPolarAngle = Math.PI / 7;
+// controls.maxAzimuthAngle = Math.PI / 1.7;
+// controls.minAzimuthAngle = -Math.PI / 9;
+// controls.enablePan = false;
 
 cena.add(camara);
 
@@ -81,12 +95,14 @@ const outlinePass = new OutlinePass(
     cena,
     camara
 );
-outlinePass.edgeStrength = 5;
+outlinePass.edgeStrength = 10;
 outlinePass.edgeGlow = 0;
 outlinePass.edgeThickness = 1;
 outlinePass.pulsePeriod = 0;
-outlinePass.visibleEdgeColor.set("#ffae00");
-outlinePass.hiddenEdgeColor.set("#ffae00");
+// outlinePass.visibleEdgeColor.set("#ffae00");
+// outlinePass.hiddenEdgeColor.set("#ffae00");
+outlinePass.visibleEdgeColor.set("#ff7300");
+outlinePass.hiddenEdgeColor.set("#ff7300");
 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(cena, camara));
@@ -132,6 +148,7 @@ function onPointerClick(event) {
         if (!clickedMesh.name.endsWith("Solo")) {
             return;
         }
+        updateSliders();
         if (clickedMesh.name === "CircleJointSolo" || clickedMesh.name === "SupportJointSolo" || clickedMesh.name === "SupportJointHolderSolo") {
             outlinePass.selectedObjects = [cena.getObjectByName("CircleJointSolo"), cena.getObjectByName("SupportJointSolo")];
             document.getElementById("SupportJointSliderDiv").className = "sliderDiv active";
@@ -190,6 +207,7 @@ new GLTFLoader().load("./models/sofa_aplique.gltf", (gltf) => {
 
     suporte = cena.getObjectByName("Support");
 
+    const d = 100;
     // Light Configuration
     const ponto_luminoso = cena.getObjectByName("Point");
     const cone_luminoso = cena.getObjectByName("Spot");
@@ -198,6 +216,17 @@ new GLTFLoader().load("./models/sofa_aplique.gltf", (gltf) => {
     cone_luminoso.intensity = 16;
     cone_luminoso.distance = 10;
     ponto_luminoso.color = cone_luminoso.color = cor_default;
+    ponto_luminoso.castShadow = false;
+
+    ponto_luminoso.shadow.mapSize.width = 1024 * 4;
+
+    ponto_luminoso.shadow.mapSize.height = 1024 * 4;
+    ponto_luminoso.shadow.camera.near = 0.5;
+    ponto_luminoso.shadow.camera.far = 500;
+    ponto_luminoso.shadow.camera.left = -d;
+    ponto_luminoso.shadow.camera.right = d;
+    ponto_luminoso.shadow.camera.top = d;
+    ponto_luminoso.shadow.camera.bottom = -d;
 
 
     // Configure Lamps
@@ -212,8 +241,21 @@ new GLTFLoader().load("./models/sofa_aplique.gltf", (gltf) => {
     luzDirecional.position.set(-1,10,-4)
     luzDirecional.target.position.set(-2,0,-2)
     luzDirecional.intensity = 2
-    luzDirecional.castShadow = false
+    luzDirecional.castShadow = false;
+
+    luzDirecional.shadow.mapSize.width = 1024 * 4;
+
+    luzDirecional.shadow.mapSize.height = 1024 * 4;
+    luzDirecional.shadow.camera.near = 0.5;
+    luzDirecional.shadow.camera.far = 500;
+
     cena.add(luzDirecional)
+
+
+    luzDirecional.shadow.camera.left = -d;
+    luzDirecional.shadow.camera.right = d;
+    luzDirecional.shadow.camera.top = d;
+    luzDirecional.shadow.camera.bottom = -d;
 
     const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
     cena.add(lightHelper)
@@ -269,11 +311,12 @@ function updateRotation() {
 }
 
 function updateSliders() {
-    abajurJointSlider.value = AbajurJoint.rotation.z;
-    abajurArmSlider.value = ArmToAbajurJoint.rotation.x;
-    shortArmSlider.value = ShortArm.rotation.x;
-    longArmSlider.value = LongArm.rotation.x;
-    supportJointSlider.value = SupportJoint.rotation.y;
+    console.log("Updating sliders...");
+    abajurJointSlider.value = THREE.MathUtils.radToDeg(AbajurJoint.rotation.z);
+    abajurArmSlider.value = THREE.MathUtils.radToDeg(ArmToAbajurJoint.rotation.x);
+    shortArmSlider.value = THREE.MathUtils.radToDeg(ShortArm.rotation.x);
+    longArmSlider.value = THREE.MathUtils.radToDeg(LongArm.rotation.x);
+    supportJointSlider.value = THREE.MathUtils.radToDeg(SupportJoint.rotation.y);
 }
 
 // Add event listeners to sliders
