@@ -176,7 +176,7 @@ let transparentMaterial = new THREE.MeshBasicMaterial({
 });
 
 // Load and Prepare Model
-new GLTFLoader().load("./models/sofa_aplique.gltf", (gltf) => {
+new GLTFLoader().load("./gltf/sofa_aplique.gltf", (gltf) => {
     gltf.scene.traverse((child) => {
         if (child.isMesh) {
             child.receiveShadow = true;

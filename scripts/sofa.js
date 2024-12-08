@@ -5,8 +5,11 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
 let cena = new THREE.Scene();
 
 let carregador = new GLTFLoader()
+let animator = new THREE.AnimationMixer(cena);
+
+// tive de mudar a pasta pois ele dava erro da path ser muito grande, dai estar no /gltf
 carregador.load(
-    './models/sofa_aplique.gltf',
+    './gltf/sofa_aplique.gltf',
     function (gltf) {
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
@@ -29,10 +32,14 @@ carregador.load(
         ];
 
         Objects.forEach((name) => {
-            const soloObjName = name + "Solo"; // Derive the Solo object's name
-            const soloObj = cena.getObjectByName(soloObjName); // Get the Solo object
+            try {
+                const soloObjName = name + "Solo"; // Derive the Solo object's name
+                const soloObj = cena.getObjectByName(soloObjName); // Get the Solo object
 
-            if (soloObj) soloObj.visible = false;
+                if (soloObj) soloObj.visible = false;
+            } catch (e) {
+                console.log(e);
+            }
         });
 
         // Light Configuration
@@ -48,8 +55,47 @@ carregador.load(
         // Configure Lamps
         let lampada_cilindrica = cena.getObjectByName("C_LightBulb");
         let lampada_esferica = cena.getObjectByName("S_LightBulb");
-        lampada_esferica.visible = false;
+        lampada_esferica.visible = true;
+        lampada_cilindrica.visible = true;
         // lampada_cilindrica.children[0].material.emissive = cor_default;
+
+        let water = cena.getObjectByName("water");
+        water.material = new THREE.MeshBasicMaterial({
+            color: 0x57a8bd,
+            opacity: 0.3,
+            transparent: true,
+        });
+
+        function setupAnimation(name, delay, speed) {
+            let animation = THREE.AnimationClip.findByName(gltf.animations, name);
+            if (!animation) {
+                console.warn("Couldn't find animation: " + name);
+                return;
+            }
+            let clip = animator.clipAction(animation);
+            if (!clip) {
+                console.warn("Couldn't create clip: " + name);
+                return;
+            }
+
+            if (name === "kelp") {
+                clip.setLoop(THREE.LoopPingPong);
+            } else {
+                clip.setLoop(THREE.LoopRepeat);
+            }
+
+            clip.startAt(delay);
+            clip.timeScale = speed;
+            clip.play();
+        }
+
+
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            for (let i = 0; i <= 10; i++) {
+                setupAnimation("kelp" + i, Math.random() * 2, .1 + Math.random() * .5);
+                setupAnimation("fish" + i, Math.random() * 2, .1 + Math.random() * .3);
+            }
+        }
 
     }
 )
@@ -64,7 +110,7 @@ let renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
 renderer.setClearColor(0xefefef, 1);
-renderer.setPixelRatio(1.5);
+// renderer.setPixelRatio(1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
@@ -90,12 +136,12 @@ orbit.target.set(2, 2, 0)
 orbit.enableDamping = true;
 orbit.enablePan = false
 orbit.maxDistance = 30;
-orbit.minDistance = 2;
+orbit.minDistance = 10;
 orbit.zoomSpeed = 0.4;
-orbit.maxPolarAngle = Math.PI / 1.75;
-orbit.minPolarAngle = Math.PI / 7;
+orbit.maxPolarAngle = Math.PI / 2;
+orbit.minPolarAngle = Math.PI / 8;
 orbit.maxAzimuthAngle = Math.PI / 1.7;
-orbit.minAzimuthAngle = -Math.PI / 9;
+orbit.minAzimuthAngle = -Math.PI / 12;
 orbit.enabled = isOrbitActive
 
 
@@ -132,9 +178,9 @@ function luzes() {
     luzDirecional.shadow.camera.top = d;
     luzDirecional.shadow.camera.bottom = -d;
 
-    const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
-    cena.add(lightHelper)
-
+    // const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
+    // cena.add(lightHelper)
+    //
     const luzAmbiente = new THREE.AmbientLight(0xffffff, 1)
     cena.add(luzAmbiente)
 }
@@ -163,6 +209,7 @@ function onWindowResize() {
 
         if (delta >= latencia_minima) {
             orbit.update();
+            animator.update(delta);
             renderer.render(cena, camera);
             delta %= latencia_minima;
         }
