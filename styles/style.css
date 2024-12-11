@@ -1824,3 +1824,13 @@ footer {
         opacity: 1;
     }
 }
+.footer-column{
+    list-style: none !important;
+}
+
+.footer-column button{
+    background: none;
+    border: none;
+    color: black;
+    text-decoration: none;
+}

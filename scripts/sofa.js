@@ -3,14 +3,21 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
 
 let cena = new THREE.Scene();
+window.cena = cena;
 
 let carregador = new GLTFLoader()
 let animator = new THREE.AnimationMixer(cena);
 
 // tive de mudar a pasta pois ele dava erro da path ser muito grande, dai estar no /gltf
-carregador.load(
-    './gltf/sofa_aplique.gltf',
-    function (gltf) {
+let path;
+if (!/Mobi|Android/i.test(navigator.userAgent)) {
+    path = './gltf/sofa_aplique.gltf';
+} else {
+    path = './gltf/sofa_aplique_mobile.gltf';
+}
+
+carregador.load(path, function (gltf) {
+
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
                 child.receiveShadow = true;
@@ -128,11 +135,11 @@ cena.add(plane);
 let camera = new THREE.PerspectiveCamera(70, threeContainer.clientWidth / threeContainer.clientHeight, 0.1, 1000)
 camera.position.set(11, 5, 4)
 // camera.rotation.set(-1, 1.2, 1)
-camera.lookAt(2, 2, 0)
+camera.lookAt(2, 2.7, 0)
 
 let isOrbitActive = false
 let orbit = new OrbitControls(camera, renderer.domElement)
-orbit.target.set(2, 2, 0)
+orbit.target.set(2, 2.7, 0)
 orbit.enableDamping = true;
 orbit.enablePan = false
 orbit.maxDistance = 30;
