@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
@@ -322,7 +324,7 @@
                     <div id="SupportJointSliderDiv" class="sliderDiv">
                         <div>
                             <label for="SupportJointSlider">Support Joint rotation: </label>
-                            <input type="range" id="SupportJointSlider" min="-80" max="80" step="1" value="0">
+                            <input type="range" id="SupportJointSlider" min="-20" max="80" step="1" value="0">
                         </div>
                     </div>
                 </div>
@@ -367,9 +369,15 @@
                                     role="button">
                                 <span class="circle" style="background:#fff;"></span>
                             </button>
-                            <button id="btn_abajur_red" class="btn btn-circle text-center abajurSection"
+                            <button id="btn_abajur_wood" class="btn btn-circle text-center abajurSection"
                                     role="button">
-                                <span class="circle" style="background:#ff0000;"></span>
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/Wood063_2K_Color.jpg')"></span>
+                            </button>
+                            <button id="btn_abajur_marble" class="btn btn-circle text-center abajurSection"
+                                    role="button">
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/marble_45_color.jpg')"></span>
                             </button>
                         </div>
                     </div>
@@ -390,6 +398,16 @@
                             <button id="btn_arms_white" class="btn btn-circle text-center armsSection" role="button">
                                 <span class="circle" style="background:#fff;"></span>
                             </button>
+                            <button id="btn_arms_wood" class="btn btn-circle text-center armsSection"
+                                    role="button">
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/Wood063_2K_Color.jpg')"></span>
+                            </button>
+                            <button id="btn_arms_marble" class="btn btn-circle text-center armsSection"
+                                    role="button">
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/marble_45_color.jpg')"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -407,8 +425,19 @@
                                     role="button">
                                 <span class="circle" style="background:#000;"></span>
                             </button>
-                            <button id="btn_support_white" class="btn btn-circle text-center supportSection" role="button">
+                            <button id="btn_support_white" class="btn btn-circle text-center supportSection"
+                                    role="button">
                                 <span class="circle" style="background:#fff;"></span>
+                            </button>
+                            <button id="btn_support_wood" class="btn btn-circle text-center supportSection"
+                                    role="button">
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/Wood063_2K_Color.jpg')"></span>
+                            </button>
+                            <button id="btn_support_marble" class="btn btn-circle text-center supportSection"
+                                    role="button">
+                                <span class="circle"
+                                      style="background-image: url('gltf/textures/marble_45_color.jpg')"></span>
                             </button>
                         </div>
                     </div>

@@ -1,3 +1,6 @@
+// noinspection JSFileReferences
+// noinspection ES6CheckImport
+
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js'
@@ -185,9 +188,6 @@ function luzes() {
     luzDirecional.shadow.camera.top = d;
     luzDirecional.shadow.camera.bottom = -d;
 
-    // const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
-    // cena.add(lightHelper)
-    //
     const luzAmbiente = new THREE.AmbientLight(0xffffff, 1)
     cena.add(luzAmbiente)
 }

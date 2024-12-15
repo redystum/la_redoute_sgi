@@ -1,10 +1,12 @@
+// noinspection JSFileReferences
+// noinspection ES6CheckImport
+
 import * as THREE from "three";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
 import {EffectComposer} from "three/addons/postprocessing/EffectComposer.js";
 import {RenderPass} from "three/addons/postprocessing/RenderPass.js";
 import {OutlinePass} from "three/addons/postprocessing/OutlinePass.js";
-import * as SGI_Example from "./example_scene.min.js";
 
 // Model Meshes
 let suporte;
@@ -12,6 +14,7 @@ let lampada_cilindrica;
 let lampada_esferica;
 let AbajurJoint, ArmToAbajurJoint, ShortArm, LongArm, SupportJoint, Abajur, SupportJointHolder, CircleJoint;
 let WoodMaterial;
+let MarbleMaterial;
 
 // Default Colors
 const cor_default = new THREE.Color("white");
@@ -42,6 +45,10 @@ function onWindowResize() {
 let cena = new THREE.Scene();
 window.cena = cena;
 
+// Add Ambient Light
+const luzAmbiente = new THREE.AmbientLight(0xffffff, 1)
+cena.add(luzAmbiente)
+
 // Renderer Setup
 const threeCanvas = document.getElementById("three-canvas");
 let renderer = new THREE.WebGLRenderer({
@@ -49,17 +56,18 @@ let renderer = new THREE.WebGLRenderer({
     antialias: true,
     powerPreference: "high-performance",
     precision: "lowp",
-});renderer.setSize(width, height);
-// renderer.setClearColor(0xefefef, 1);
-renderer.setPixelRatio(1.5);
-renderer.setClearColor(0x5f5f5f, 1);
+});
+renderer.setSize(width, height);
+renderer.setPixelRatio(1.2);
+// renderer.setClearColor(0x5f5f5f, 1);
+renderer.setClearColor(0x2a2a35, 1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+window.renderer = renderer;
 
-
-const geometry = new THREE.PlaneGeometry(100, 100);
+const geometry = new THREE.PlaneGeometry(10000, 10000);
 geometry.rotateX(-Math.PI / 2);
 geometry.translate(0, -1.63, 0);
 const material = new THREE.ShadowMaterial({opacity: 0.5});
@@ -76,16 +84,17 @@ camara.position.set(9, 5.5, -.7);
 camara.lookAt(-0.6, 5, -5);
 // Orbit Controls
 const controls = new OrbitControls(camara, renderer.domElement);
-controls.enableDamping = true;
 controls.target.set(-0.6, 5, -5);
-// controls.maxDistance = 30;
-// controls.minDistance = 2;
-// controls.zoomSpeed = 0.4;
-// controls.maxPolarAngle = Math.PI / 1.75;
-// controls.minPolarAngle = Math.PI / 7;
-// controls.maxAzimuthAngle = Math.PI / 1.7;
-// controls.minAzimuthAngle = -Math.PI / 9;
-// controls.enablePan = false;
+controls.enableDamping = true;
+controls.enablePan = false
+controls.maxDistance = 30;
+controls.minDistance = 10;
+controls.zoomSpeed = 0.4;
+controls.maxPolarAngle = Math.PI / 1.8;
+controls.minPolarAngle = Math.PI / 10;
+controls.maxAzimuthAngle = Math.PI / 1.8;
+controls.minAzimuthAngle = -Math.PI / 17;
+controls.enablePan = false;
 
 cena.add(camara);
 
@@ -131,7 +140,7 @@ function onPointerClick(event) {
         return;
     }
 
-    var rect = threeCanvas.getBoundingClientRect();
+    let rect = threeCanvas.getBoundingClientRect();
     mouse.x = ((event.clientX - rect.left) / (rect.right - rect.left)) * 2 - 1;
     mouse.y = -((event.clientY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
     console.log("X:" + mouse.x, "Y:" + mouse.y);
@@ -146,6 +155,7 @@ function onPointerClick(event) {
     if (intersects.length > 0) {
         let clickedMesh = intersects[0].object;
         if (!clickedMesh.name.endsWith("Solo")) {
+            outlinePass.selectedObjects = [];
             return;
         }
         updateSliders();
@@ -176,7 +186,16 @@ let transparentMaterial = new THREE.MeshBasicMaterial({
 });
 
 // Load and Prepare Model
-new GLTFLoader().load("./gltf/sofa_aplique.gltf", (gltf) => {
+let path;
+if (!/Mobi|Android/i.test(navigator.userAgent)) {
+    path = './gltf/sofa_aplique.gltf';
+} else {
+    path = './gltf/sofa_aplique_mobile.gltf';
+}
+
+let animator = new THREE.AnimationMixer(cena);
+
+new GLTFLoader().load(path, function (gltf) {
     gltf.scene.traverse((child) => {
         if (child.isMesh) {
             child.receiveShadow = true;
@@ -200,11 +219,11 @@ new GLTFLoader().load("./gltf/sofa_aplique.gltf", (gltf) => {
             LongArm = cena.getObjectByName("LongArm");
             SupportJoint = cena.getObjectByName("SupportJoint");
         }
-        Abajur = cena.getObjectByName("Abajur");
-        SupportJointHolder = cena.getObjectByName("SupportJointHolder");
-        CircleJoint = cena.getObjectByName("CircleJoint");
     });
-
+    
+    Abajur = cena.getObjectByName("Abajur");
+    SupportJointHolder = cena.getObjectByName("SupportJointHolder");
+    CircleJoint = cena.getObjectByName("CircleJoint");
     suporte = cena.getObjectByName("Support");
 
     const d = 100;
@@ -213,14 +232,25 @@ new GLTFLoader().load("./gltf/sofa_aplique.gltf", (gltf) => {
     const cone_luminoso = cena.getObjectByName("Spot");
     ponto_luminoso.intensity = 300;
     ponto_luminoso.distance = 1.25 * 1000;
-    cone_luminoso.intensity = 16;
+    cone_luminoso.intensity = 0;
     cone_luminoso.distance = 10;
+    ponto_luminoso.scale.set(0.5, 0.5, 0.5);
     ponto_luminoso.color = cone_luminoso.color = cor_default;
-    ponto_luminoso.castShadow = false;
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        ponto_luminoso.castShadow = true;
+        cone_luminoso.castShadow = true;
+    } else {
+        ponto_luminoso.castShadow = false;
+        cone_luminoso.castShadow = false;
+    }
 
-    ponto_luminoso.shadow.mapSize.width = 1024 * 4;
+    const ponto_lum_helper = new THREE.PointLightHelper(ponto_luminoso);
+    cena.add(ponto_lum_helper);
 
-    ponto_luminoso.shadow.mapSize.height = 1024 * 4;
+    ponto_luminoso.shadow.mapSize.width = 256;
+    ponto_luminoso.shadow.mapSize.height = 256;
+    ponto_luminoso.shadow.bias = -0.001;
+
     ponto_luminoso.shadow.camera.near = 0.5;
     ponto_luminoso.shadow.camera.far = 500;
     ponto_luminoso.shadow.camera.left = -d;
@@ -236,32 +266,54 @@ new GLTFLoader().load("./gltf/sofa_aplique.gltf", (gltf) => {
     lampada_cilindrica.children[0].material.emissive = cor_default;
 
     WoodMaterial = cena.getObjectByName("WoodMaterial").material;
+    WoodMaterial.emissive = new THREE.Color(0x8b4513);
+    WoodMaterial.emissiveIntensity = .2;
 
-    const luzDirecional = new THREE.DirectionalLight("white", 1)
-    luzDirecional.position.set(-1,10,-4)
-    luzDirecional.target.position.set(-2,0,-2)
-    luzDirecional.intensity = 2
-    luzDirecional.castShadow = false;
+    MarbleMaterial = cena.getObjectByName("MarbleMaterial").material;
+    MarbleMaterial.emissive = new THREE.Color(0xffffff);
+    MarbleMaterial.emissiveIntensity = .2;
 
-    luzDirecional.shadow.mapSize.width = 1024 * 4;
+    let water = cena.getObjectByName("water");
+    water.material = new THREE.MeshBasicMaterial({
+        color: 0x57a8bd,
+        opacity: 0.3,
+        transparent: true,
+    });
 
-    luzDirecional.shadow.mapSize.height = 1024 * 4;
-    luzDirecional.shadow.camera.near = 0.5;
-    luzDirecional.shadow.camera.far = 500;
+    function setupAnimation(name, delay, speed) {
+        let animation = THREE.AnimationClip.findByName(gltf.animations, name);
+        if (!animation) {
+            console.warn("Couldn't find animation: " + name);
+            return;
+        }
+        let clip = animator.clipAction(animation);
+        if (!clip) {
+            console.warn("Couldn't create clip: " + name);
+            return;
+        }
 
-    cena.add(luzDirecional)
+        if (name === "kelp") {
+            clip.setLoop(THREE.LoopPingPong);
+        } else {
+            clip.setLoop(THREE.LoopRepeat);
+        }
+
+        clip.startAt(delay);
+        clip.timeScale = speed;
+        clip.play();
+    }
 
 
-    luzDirecional.shadow.camera.left = -d;
-    luzDirecional.shadow.camera.right = d;
-    luzDirecional.shadow.camera.top = d;
-    luzDirecional.shadow.camera.bottom = -d;
-
-    const lightHelper = new THREE.DirectionalLightHelper(luzDirecional)
-    cena.add(lightHelper)
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        for (let i = 0; i <= 10; i++) {
+            setupAnimation("kelp" + i, Math.random() * 2, .1 + Math.random() * .5);
+            setupAnimation("fish" + i, Math.random() * 2, .1 + Math.random() * .3);
+        }
+    }
 
     setSoloObjectsPosition();
     updateSliders();
+    updateRotation();
 });
 
 function setSoloObjectsPosition() {
@@ -339,6 +391,7 @@ supportJointSlider.addEventListener("input", updateRotation);
         if (delta >= latencia_minima) {
             controls.update();
             composer.render();
+            animator.update(delta);
             setSoloObjectsPosition();
             delta %= latencia_minima;
         }
@@ -375,15 +428,26 @@ $("#btn_abajur_white").click(function () {
     }
 });
 
-$("#btn_abajur_red").click(function () {
+$("#btn_abajur_wood").click(function () {
     if (Abajur) {
         $(".abajurSection").removeClass("active");
-        $("#btn_abajur_red").addClass("active");
-        $("#abajurHeading span").text("Vermelho");
+        $("#btn_abajur_wood").addClass("active");
+        $("#abajurHeading span").text("Madeira");
         Abajur.material = WoodMaterial;
         if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
-            console.log(Abajur.children[0]);
             Abajur.children[0].material = WoodMaterial;
+        }
+    }
+});
+
+$("#btn_abajur_marble").click(function () {
+    if (Abajur) {
+        $(".abajurSection").removeClass("active");
+        $("#btn_abajur_marble").addClass("active");
+        $("#abajurHeading span").text("Mármore");
+        Abajur.material = MarbleMaterial;
+        if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
+            Abajur.children[0].material = MarbleMaterial;
         }
     }
 });
@@ -416,6 +480,34 @@ $("#btn_arms_white").click(function () {
     }
 });
 
+$("#btn_arms_wood").click(function () {
+    if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
+        $(".armsSection").removeClass("active");
+        $("#btn_arms_wood").addClass("active");
+        $("#armsHeading span").text("Madeira");
+        ShortArm.material = WoodMaterial;
+        LongArm.material = WoodMaterial;
+        CircleJoint.material = WoodMaterial;
+        SupportJoint.material = WoodMaterial;
+        ArmToAbajurJoint.material = WoodMaterial;
+        AbajurJoint.material = WoodMaterial;
+    }
+});
+
+$("#btn_arms_marble").click(function () {
+    if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
+        $(".armsSection").removeClass("active");
+        $("#btn_arms_marble").addClass("active");
+        $("#armsHeading span").text("Mármore");
+        ShortArm.material = MarbleMaterial;
+        LongArm.material = MarbleMaterial;
+        CircleJoint.material = MarbleMaterial;
+        SupportJoint.material = MarbleMaterial;
+        ArmToAbajurJoint.material = MarbleMaterial;
+        AbajurJoint.material = MarbleMaterial;
+    }
+});
+
 $("#btn_support_black").click(function () {
     if (suporte && SupportJointHolder) {
         $(".supportSection").removeClass("active");
@@ -433,6 +525,26 @@ $("#btn_support_white").click(function () {
         $("#supportHeading span").text("Branco");
         suporte.material = whiteMaterial;
         SupportJointHolder.material = whiteMaterial;
+    }
+});
+
+$("#btn_support_wood").click(function () {
+    if (suporte && SupportJointHolder) {
+        $(".supportSection").removeClass("active");
+        $("#btn_support_wood").addClass("active");
+        $("#supportHeading span").text("Madeira");
+        suporte.material = WoodMaterial;
+        SupportJointHolder.material = WoodMaterial;
+    }
+});
+
+$("#btn_support_marble").click(function () {
+    if (suporte && SupportJointHolder) {
+        $(".supportSection").removeClass("active");
+        $("#btn_support_marble").addClass("active");
+        $("#supportHeading span").text("Mármore");
+        suporte.material = MarbleMaterial;
+        SupportJointHolder.material = MarbleMaterial;
     }
 });
 
