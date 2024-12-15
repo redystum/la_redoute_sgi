@@ -119,7 +119,7 @@ let renderer = new THREE.WebGLRenderer({
     precision: "lowp",
 });
 renderer.setSize(threeContainer.clientWidth, threeContainer.clientHeight);
-renderer.setClearColor(0xefefef, 1);
+renderer.setClearColor(0xf1f1f1, 1);
 // renderer.setPixelRatio(1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
@@ -198,7 +198,7 @@ window.addEventListener("resize", onWindowResize);
 
 function onWindowResize() {
     let width = threeContainer.clientWidth;
-    let height = threeContainer.clientHeight;
+    // let height = threeContainer.clientHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);

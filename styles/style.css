@@ -285,6 +285,8 @@ canvas {
     width: 250px !important;
     height: 380px;
 
+    margin-right: 3px;
+
     .card {
         height: 100%;
         width: 250px;

@@ -289,48 +289,101 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 p-0" id="three-canvas-container">
-            <div class="canvas-container">
-                <canvas id="three-canvas"></canvas>
-                <div class="floatingSliders">
-                    <div id="AbajurJointSliderDiv" class="sliderDiv">
-                        <div>
-                            <label for="AbajurJointSlider">Abajur Joint rotation: </label>
-                            <input type="range" id="AbajurJointSlider" min="-150" max="150" step="1" value="0">
-                        </div>
+        <div class="col-lg-8 p-0" id="three-canvas-container">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
                     </div>
-
-                    <div id="ArmToAbajurJointSliderDiv" class="sliderDiv">
-                        <div>
-                            <label for="ArmToAbajurJointSlider">ArmToAbajurJoint rotation: </label>
-                        </div>
-                        <input type="range" id="ArmToAbajurJointSlider" min="-90" max="90" step="1" value="0">
+                    <div class="carousel-item">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
                     </div>
-
-                    <div id="ShortArmSliderDiv" class="sliderDiv">
-                        <div>
-                            <label for="ShortArmSlider">Short Arm rotation: </label>
-                            <input type="range" id="ShortArmSlider" min="-90" max="90" step="1" value="0">
-                        </div>
+                    <div class="carousel-item">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
                     </div>
+                    <div class="carousel-item">
+                        <div class="canvas-container">
+                            <canvas id="three-canvas"></canvas>
+                            <div class="loading-spinner text-light text-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <br>
+                                A carregar o modelo, por favor aguarde...
+                            </div>
+                            <div class="floatingSliders">
+                                <div id="AbajurJointSliderDiv" class="sliderDiv">
+                                    <div>
+                                        <label for="AbajurJointSlider">Abajur Joint rotation: </label>
+                                        <input type="range" id="AbajurJointSlider" min="-150" max="150" step="1"
+                                               value="0">
+                                    </div>
+                                </div>
 
-                    <div id="LongArmSliderDiv" class="sliderDiv">
-                        <div>
-                            <label for="LongArmSlider">Long Arm rotation: </label>
-                            <input type="range" id="LongArmSlider" min="-90" max="90" step="1" value="0">
-                        </div>
-                    </div>
+                                <div id="ArmToAbajurJointSliderDiv" class="sliderDiv">
+                                    <div>
+                                        <label for="ArmToAbajurJointSlider">ArmToAbajurJoint rotation: </label>
+                                    </div>
+                                    <input type="range" id="ArmToAbajurJointSlider" min="-90" max="90" step="1"
+                                           value="0">
+                                </div>
 
-                    <div id="SupportJointSliderDiv" class="sliderDiv">
-                        <div>
-                            <label for="SupportJointSlider">Support Joint rotation: </label>
-                            <input type="range" id="SupportJointSlider" min="-20" max="80" step="1" value="0">
+                                <div id="ShortArmSliderDiv" class="sliderDiv">
+                                    <div>
+                                        <label for="ShortArmSlider">Short Arm rotation: </label>
+                                        <input type="range" id="ShortArmSlider" min="-90" max="90" step="1" value="0">
+                                    </div>
+                                </div>
+
+                                <div id="LongArmSliderDiv" class="sliderDiv">
+                                    <div>
+                                        <label for="LongArmSlider">Long Arm rotation: </label>
+                                        <input type="range" id="LongArmSlider" min="-90" max="90" step="1" value="0">
+                                    </div>
+                                </div>
+
+                                <div id="SupportJointSliderDiv" class="sliderDiv">
+                                    <div>
+                                        <label for="SupportJointSlider">Support Joint rotation: </label>
+                                        <input type="range" id="SupportJointSlider" min="-20" max="80" step="1"
+                                               value="0">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="carousel-control-prev text-invert" type="button"
+                        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next text-invert" type="button"
+                        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active thumbnail" aria-current="true" aria-label="Slide 1">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            class="thumbnail" aria-label="Slide 2">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            class="thumbnail" aria-label="Slide 3">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
+                    </button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            class="thumbnail" aria-label="Slide 4">
+                        <img src="./assets/renders/thumbnail.png" class="d-block w-100" alt="...">
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="col-md-4 px-5 pt-2">
+        <div class="col-lg-4 px-5 pt-2 mt-lg-5">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">La Redoute</a></li>
@@ -339,14 +392,14 @@
                 </ol>
             </nav>
 
-            <h1 class="mb-3">Aplique articulado, Candeeiro</h1>
+            <h1 class="mb-3">Aplique articulado, Moke</h1>
             <div class="d-flex justify-content-between mb-3">
                 <div>
                     <a href="#descricao" class="text-black">Ver descrição</a>
                 </div>
                 <div>
                     <span class="text-warning">&#9733; </span><span class="me-2"><b>4,8</b> /5</span>
-                    <a href="#" class="text-black fs-x-small">11 avaliações</a>
+                    <a href="#avaliacoes" class="text-black fs-x-small">11 avaliações</a>
                 </div>
             </div>
 
@@ -386,7 +439,7 @@
                     <h2 class="accordion-header" id="armsHeading">
                         <button class="px-1 accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#armsCollapse" aria-expanded="false" aria-controls="armsCollapse">
-                            arms:<span>Black</span>
+                            braços:<span>Black</span>
                         </button>
                     </h2>
                     <div id="armsCollapse" class="accordion-collapse collapse" aria-labelledby="armsHeading"
@@ -415,7 +468,7 @@
                     <h2 class="accordion-header" id="supportHeading">
                         <button class="px-1 accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#supportCollapse" aria-expanded="false" aria-controls="supportCollapse">
-                            support:<span>Black</span>
+                            suporte:<span>Black</span>
                         </button>
                     </h2>
                     <div id="supportCollapse" class="accordion-collapse collapse" aria-labelledby="supportHeading"
@@ -445,8 +498,8 @@
             </div>
 
             <div class="d-flex align-items-center mb-3">
-                <span class="text-muted text-decoration-line-through me-3">119.20 €</span>
-                <span class="fw-bold fs-4">149.00 €</span>
+                <span class="text-muted text-decoration-line-through me-3">139.00 €</span>
+                <span class="fw-bold fs-4">111.20 €</span>
                 <span class="badge bg-dark ms-3">-20%</span>
             </div>
 
@@ -458,13 +511,559 @@
             </button>
         </div>
     </div>
+</div>
 
-    <div class="row mt-5">
+<div class="container-fluid p-5 mt-5 bg-white-subtle">
+    <div class="row">
+        <h3>Produtos Semelhantes</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12 productRow">
+            <div class="mb-5 scrollableDiv">
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/3da8a2ad71ce8f84b4da77c7b56d34c1.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique em ferro, Hiba </h5>
+                                <div class="bottom">
+                                    <p class="card-text">58.49 € <span class="oldPrice">89.99</span><span
+                                            class="discount">-35%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/d022d62a68f4222aa8ae07e54af03e76.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique sem abajur, em ferro, Hiba </h5>
+                                <div class="bottom">
+                                    <p class="card-text">47.99 € <span class="oldPrice">59.99</span><span
+                                            class="discount">-20%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/684e24f7690d3c9289b2b426639f463a.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique em metal e vidro âmbar, Palma </h5>
+                                <div class="bottom">
+                                    <p class="card-text">67.58 € <span class="oldPrice">109.00</span><span
+                                            class="discount">-38%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/8f8e6e617abfde5f3634b9ee9ae93962.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique com braço duplo, em metal e vidro fumado, Atea</h5>
+                                <div class="bottom">
+                                    <p class="card-text">57.99 € <span class="oldPrice">99.99</span><span
+                                            class="discount">-42%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/3b74bf2a373f66518174ef73f215ab47.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique duplo XL em latão envelhecido, Zoticus</h5>
+                                <div class="bottom">
+                                    <p class="card-text">287.20 € <span class="oldPrice">359.00</span><span
+                                            class="discount">-20%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardWrapper">
+                    <div class="card h-100 bg-light">
+                        <a href="404.html">
+                            <div>
+                                <img src="./assets/products/427deddab4fe0be51ac75494ffe6c3e8.png"
+                                     class="card-img-top" alt="image from laredoute">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Aplique duplo articulado, em ferro, Hiba </h5>
+                                <div class="bottom">
+                                    <p class="card-text">91.00 € <span class="oldPrice">140.00</span><span
+                                            class="discount">-35%</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
+            </div>
+        </div>
 
     </div>
 
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <h3 id="descricao">Descrição</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                <strong>Aplique articulado, Moke - AM.PM</strong><br>
+                Ref 2456902 / GJF997
+            </p>
+            <p>
+                Bonito, elegante & simples. A gama Moke faz parte dos icónicos da AMPM: criações exclusivas, enraizadas
+                no ADN da marca.
+                Com uma estética escultural, radical e intemporal, a gama Moke está disponível em metal epóxi preto ou
+                acabamento moka mate.
+                O aplique Moke tem um braço articulado e um difusor móvel para ajustar a luz para onde quiser:
+                iluminação precisa para a leitura ou difusão suave.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <img src="./assets/renders/articulado_thumbnail.png" class="img-fluid" alt="image from laredoute">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Descrição:</h4>
+            <ul>
+                <li>Várias posições possíveis: a platina pode ser colocada na posição vertical ou horizontal.</li>
+                <li>O braço articulado e o abajur podem ajustar-se de várias formas</li>
+                <li>Ferro epóxi preto ou acabamento moka mate</li>
+                <li>Acabamento em ferro com barra ligeiramente enrolada</li>
+                <li>Refletor cónico ajustável a 120°, interior com acabamento epóxi branco</li>
+                <li>Casquilho E14 para lâmpada fluocompacta 8W máx., não incluída</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <img src="./assets/renders/articulado_thumbnail.png" class="img-fluid" alt="image from laredoute">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Dimensões:</h4>
+            <ul>
+                <li>Suporte: Diâmetro 11 cm, espessura 1 cm</li>
+                <li>Braço 1: 42 cm</li>
+                <li>Braço 2: 15 cm</li>
+                <li>Abajur: diâmetro 12 cm, altura 15 cm</li>
+                <li>Totais na posição mais afastada: Comprimento 18,8 x largura 18,8 x profundidade 84 cm</li>
+            </ul>
+            <h4>Dimensões e peso da embalagem:</h4>
+            <ul>
+                <li>24 x 24 x 55 cm</li>
+                <li>1,3 kg</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <img src="./assets/renders/articulado_thumbnail.png" class="img-fluid" alt="image from laredoute">
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5" id="avaliacoes">
+
+    <div class="row">
+        <h3>Opiniões dos clientes</h3>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-4 text-y-center">
+            <div class="text-center">
+                <h1 class="pb-4">
+                    <span class="text-warning me-1">&#9733;</span> 4.8
+                </h1>
+                <p>
+                    Relação qualidade/preço: <span class="text-warning mx-1">&#9733;</span> 4.7
+                </p>
+                <p>
+                    Design do produto: <span class="text-warning mx-1">&#9733;</span> 4.8
+                </p>
+                <p>
+                    Prático: <span class="text-warning mx-1">&#9733;</span> 4.9
+                </p>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="comments">
+                <div class="p-5 mx-4 mb-2 border rounded bg-white-subtle">
+                    <p class="m-0 mb-2">
+                        <span class="text-warning">&#9733; </span> <strong>4.8</strong> / 5
+                    </p>
+                    <h4>Excelente Iluminação</h4>
+                    <p>
+                        Este candeeiro é simplesmente fantástico! A qualidade dos materiais é excelente e a luz é
+                        perfeita para leitura. Recomendo vivamente!
+                    </p>
+                    <p class="mb-2 text-secondary">
+                        Avaliação de Ana Silva - Cliente desde 2018
+                    </p>
+                </div>
+                <div class="p-5 mx-4 mb-2 border rounded bg-white-subtle">
+                    <p class="m-0 mb-2">
+                        <span class="text-warning">&#9733; </span> <strong>4.7</strong> / 5
+                    </p>
+                    <h4>Design Elegante</h4>
+                    <p>
+                        Adorei o design deste candeeiro! Ele combina perfeitamente com a decoração da minha sala e a luz é suave e agradável.
+                    </p>
+                    <p class="mb-2 text-secondary">
+                        Avaliação de Pedro Costa - Cliente desde 2019
+                    </p>
+                </div>
+                <div class="p-5 mx-4 mb-2 border rounded bg-white-subtle">
+                    <p class="m-0 mb-2">
+                        <span class="text-warning">&#9733; </span> <strong>4.9</strong> / 5
+                    </p>
+                    <h4>Funcional e Bonito</h4>
+                    <p>
+                        Este candeeiro é muito funcional e bonito. A articulação permite ajustar a luz conforme necessário, o que é ótimo para leitura.
+                    </p>
+                    <p class="mb-2 text-secondary">
+                        Avaliação de Maria Fernandes - Cliente desde 2020
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer id="footer" role="contentinfo">
+    <ul class="widgetLine widgetLine__1">
+        <li class="footer-column">
+            <div class="reinsurance__wrap" data-widgetid="12639" data-widgettemplate="FooterServiceWithPicto"
+                 data-datemodified="2023-12-05T10:59:32">
+                <button class="reinsurance__item " data-url="/services/delivery.aspx" data-ispanel="True" tabindex="0">
+                    <img loading="lazy" width="48px" height="48px"
+                         src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4287c78912331.svg"
+                         alt="Envio grátis" class="reinsurance__picto">
+                    <h3 class="reinsurance__label">Envio grátis*</h3>
+                </button>
+            </div>
+        </li>
+        <li class="footer-column">
+            <div class="reinsurance__wrap" data-widgetid="12783" data-widgettemplate="FooterServiceWithPicto"
+                 data-datemodified="2023-02-16T14:09:12">
+                <button class="reinsurance__item " data-url="/services/returns.aspx" data-ispanel="True" tabindex="0">
+                    <img loading="lazy" width="48px" height="48px"
+                         src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4287d01aab2a3.svg" alt=""
+                         class="reinsurance__picto">
+                    <h3 class="reinsurance__label">TROCAS &amp; DEVOLUÇÕES</h3>
+                </button>
+            </div>
+        </li>
+        <li class="footer-column">
+            <div class="reinsurance__wrap" data-widgetid="12784" data-widgettemplate="FooterServiceWithPicto"
+                 data-datemodified="2023-02-16T14:09:02">
+                <button class="reinsurance__item" data-url="/services/payment.aspx" data-ispanel="True" tabindex="0">
+                    <img loading="lazy" width="48px" height="48px"
+                         src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4287d9734039c.svg" alt=""
+                         class="reinsurance__picto">
+                    <h3 class="reinsurance__label">PAGAMENTO SEGURO</h3>
+                </button>
+            </div>
+        </li>
+        <li class="footer-column">
+            <div class="reinsurance__wrap" data-widgetid="12785" data-widgettemplate="FooterServiceWithPicto"
+                 data-datemodified="2023-02-16T14:09:20">
+                <button class="reinsurance__item" data-url="/services/contactDetails.aspx" data-ispanel="True"
+                        tabindex="0">
+                    <img loading="lazy" width="48px" height="48px"
+                         src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4287e99fa33ec.svg" alt=""
+                         class="reinsurance__picto">
+                    <h3 class="reinsurance__label">APOIO AO CLIENTE</h3>
+                </button>
+            </div>
+        </li>
+    </ul>
+    <div class="widgetLine widgetLine__2">
+        <div class="footer-column">
+            <div class="footer-services-block" data-widgetid="12786" data-widgettemplate="FooterBlockOfLinks"
+                 data-datemodified="2023-12-05T12:31:25">
+                <h3 class="footer-services-title" tabindex="0">LA REDOUTE</h3>
+                <ul class="footer-services-content">
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Quem somos</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Contactos</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Sustentabilidade e responsabilidade social
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="footer-services-block" data-widgetid="12787" data-widgettemplate="FooterBlockOfLinks"
+                 data-datemodified="2024-07-25T09:23:57">
+                <h3 class="footer-services-title" tabindex="0">SERVIÇOS</h3>
+                <ul class="footer-services-content">
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Ajuda</a>
+                    </li>
+                    <li class="footer-services-link">
+                        <a href="404.html">Trocas &amp; Devoluções</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Remover inscrição de Newsletter</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Recolha e montagem</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Todos os serviços</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="footer-services-block" data-widgetid="12789" data-widgettemplate="FooterBlockOfLinks"
+                 data-datemodified="2024-03-19T18:01:20">
+                <h3 class="footer-services-title" tabindex="0">MARCAS EXCLUSIVAS</h3>
+                <ul class="footer-services-content">
+                    <li class="footer-services-link  ">
+                        <a href="404.html">La Redoute Collections</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">La Redoute Intérieurs</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">AM.PM.</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="footer-services-block" data-widgetid="12790" data-widgettemplate="FooterBlockOfLinks"
+                 data-datemodified="2024-07-25T09:28:02">
+                <h3 class="footer-services-title" tabindex="0">UNIVERSO LA REDOUTE</h3>
+                <ul class="footer-services-content">
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Inspiração</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Vídeos</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">Profissionais</a>
+                    </li>
+                    <li class="footer-services-link  ">
+                        <a href="404.html">APP La Redoute</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="widgetLine widgetLine__3 ">
+        <div class="footer-column">
+            <h3 class="logoLinks__title" tabindex="0">MODOS DE PAGAMENTO</h3>
+            <div class="logoLinks__wrap" data-widgetid="12791" data-widgettemplate="FooterBlockOfLogos"
+                 data-datemodified="2024-02-07T11:55:31">
+                <button class="prev-icon"></button>
+                <ul class="logoLinks__items canScroll hasScroll" data-name="Footer payments line 3">
+                    <li class="logoLinks__item" data-id="0">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4288b1604a231.svg" alt="visa"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="1">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4288b25d9ed96.svg"
+                             alt="mastercard" class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="2">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/4288b3496bc60.svg" alt="paypal"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="3">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42bb001e12534.svg" alt="MB"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="4">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42bb007871d20.svg" alt="MB way"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="5">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/58c6e2c6af917.svg"
+                             alt="Apple pay" class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="6">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/58d32b47fcc81.svg"
+                             alt="Google Pay" class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="7">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/5b85fe0adbcb3.svg" alt="Klarna"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="8">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/58567c4d30ca6.svg" alt="amex"
+                             class="logoLinks__picto">
+                    </li>
+                </ul>
+                <button class="next-icon"></button>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3 class="logoLinks__title" tabindex="0">SEMPRE JUNTOS</h3>
+            <div class="logoLinks__wrap" data-widgetid="12883" data-widgettemplate="FooterBlockOfLogos"
+                 data-datemodified="2024-11-26T09:14:48">
+                <button class="prev-icon"></button>
+                <ul class="logoLinks__items canScroll hasScroll" data-name="Footer social line 3">
+                    <li class="logoLinks__item" data-id="0">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42ba8d58272c5.svg"
+                                 alt="Facebook" class="logoLinks__picto invert">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="1">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/5352aa58eae14.svg" alt="X"
+                                 class="logoLinks__picto invert">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="2">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42ba9232132e1.svg"
+                                 alt="Instagram" class="logoLinks__picto invert">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="3">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42ba940091394.svg"
+                                 alt="Pinterest" class="logoLinks__picto invert">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="4">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42ba97477fd62.svg"
+                                 alt="Youtube" class="logoLinks__picto invert">
+                        </a>
+                    </li>
+                </ul>
+                <button class="next-icon"></button>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3 class="logoLinks__title" tabindex="0">APP LA REDOUTE</h3>
+            <div class="logoLinks__wrap" data-widgetid="12884" data-widgettemplate="FooterBlockOfLogos"
+                 data-datemodified="2022-10-04T03:57:18">
+                <ul class="logoLinks__items " data-name="Footer app line 3">
+                    <li class="logoLinks__item" data-id="0">
+                        <a href="404.html"
+                           target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42c56496037d0.svg" alt=""
+                                 class="logoLinks__picto">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="1">
+                        <a href="404.html" target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/42bac4ab3a5a8.svg" alt=""
+                                 class="logoLinks__picto">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3 class="logoLinks__title" tabindex="0">DISTINÇÕES</h3>
+            <div class="logoLinks__wrap" data-widgetid="15212" data-widgettemplate="FooterBlockOfLogos"
+                 data-datemodified="2024-04-29T15:30:28">
+                <ul class="logoLinks__items " data-name="Footer trust line 3">
+                    <li class="logoLinks__item" data-id="0">
+                        <a href="404.html"
+                           target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/438136ea7e35c.webp"
+                                 alt="marca_recomendada" class="logoLinks__picto">
+                        </a>
+                    </li>
+                    <li class="logoLinks__item" data-id="1">
+                        <img loading="lazy"
+                             src="https://cdn.laredoute.com/generic/marketingwarehouse/6/43813b50621ae.webp" alt="ctt"
+                             class="logoLinks__picto">
+                    </li>
+                    <li class="logoLinks__item" data-id="2">
+                        <a href="404.html"
+                           target="_blank">
+                            <img loading="lazy"
+                                 src="https://cdn.laredoute.com/generic/marketingwarehouse/6/43813bae7df0a.svg"
+                                 alt="confio" class="logoLinks__picto">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="widgetLine widgetLine__4">
+        <div class="footer-column">
+            <ul id="FooterListOfLinks" class="footer__listOfLinks" data-cerberus="area_footer_link"
+                data-widgetid="12908" data-widgettemplate="FooterListOfLinks" data-datemodified="2024-11-25T16:10:20">
+                <li class="footer__listOfLinks__item"><a href="404.html">Condições gerais de venda</a></li>
+                <li class="footer__listOfLinks__item"><a href="404.html">*Condições das ofertas em
+                    vigor</a></li>
+                <li class="footer__listOfLinks__item"><a href="404.html">Política de privacidade e
+                    cookies</a></li>
+                <li class="footer__listOfLinks__item"><a href="404.html">Livro de reclamações
+                    eletrónico</a></li>
+                <li class="footer__listOfLinks__item"><a href="404.html">Recrutamento
+                    La Redoute</a></li>
+            </ul>
+            <div class="footer__countrySelector" data-widgetid="0" data-widgettemplate="FooterListOfLinks">
+                <span class="sr-only" id="countryInfo"></span>
+                <span class="sr-only" id="changeCountry"></span>
+                <span id="openCountryChoice" tabindex="0" role="combobox" aria-labelledby="countryInfo changeCountry"
+                      aria-controls="ulCountryLinks" aria-expanded="false">Portugal</span>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script async src="./node_modules/es-module-shims.js"></script>
 <script type="importmap">

@@ -30,10 +30,11 @@ const longArmSlider = document.getElementById("LongArmSlider");
 const supportJointSlider = document.getElementById("SupportJointSlider");
 
 window.addEventListener("resize", onWindowResize);
+document.querySelector('.carousel').addEventListener('slid.bs.carousel', onWindowResize);
 
 function onWindowResize() {
     width = document.getElementById("three-canvas-container").clientWidth;
-    height = document.getElementById("three-canvas-container").clientHeight;
+    // height = document.getElementById("three-canvas-container").clientHeight;
     camara.aspect = width / height;
     camara.updateProjectionMatrix();
     renderer.setSize(width, height);
@@ -185,136 +186,155 @@ let transparentMaterial = new THREE.MeshBasicMaterial({
     opacity: 0,
 });
 
-// Load and Prepare Model
-let path;
-if (!/Mobi|Android/i.test(navigator.userAgent)) {
-    path = './gltf/sofa_aplique.gltf';
-} else {
-    path = './gltf/sofa_aplique_mobile.gltf';
-}
 
+// Load and Prepare Model
+async function loadModel(path) {
+    return new Promise((resolve, reject) => {
+        new GLTFLoader().load(path, function (gltf) {
+            resolve(gltf);
+        }, undefined, function (error) {
+            reject(error);
+        });
+    });
+}
 let animator = new THREE.AnimationMixer(cena);
 
-new GLTFLoader().load(path, function (gltf) {
-    gltf.scene.traverse((child) => {
-        if (child.isMesh) {
-            child.receiveShadow = true;
-            child.castShadow = true;
-        }
-    });
+async function init() {
+    let loadingSpinner = document.getElementsByClassName('loading-spinner')[0];
+    try {
+        const path = !/Mobi|Android/i.test(navigator.userAgent) ? './gltf/sofa_aplique.gltf' : './gltf/sofa_aplique_mobile.gltf';
+        // desta forma evita dar freeze na página ao carregar o modelo
+        const gltf = await loadModel(path);
 
-    cena.add(gltf.scene);
+        gltf.scene.traverse((child) => {
+            if (child.isMesh) {
+                child.receiveShadow = true;
+                child.castShadow = true;
+            }
+        });
 
-    Objects.forEach((name) => {
-        const baseObj = cena.getObjectByName(name); // Get the base object
-        const soloObjName = name + "Solo"; // Derive the Solo object's name
-        const soloObj = cena.getObjectByName(soloObjName); // Get the Solo object
+        cena.add(gltf.scene);
 
-        if (soloObj) soloObj.material = transparentMaterial;
+        Objects.forEach((name) => {
+            const baseObj = cena.getObjectByName(name);
+            const soloObjName = name + "Solo";
+            const soloObj = cena.getObjectByName(soloObjName);
 
-        if (soloObj && baseObj) {
-            AbajurJoint = cena.getObjectByName("AbajurJoint");
-            ArmToAbajurJoint = cena.getObjectByName("ArmToAbajurJoint");
-            ShortArm = cena.getObjectByName("ShortArm");
-            LongArm = cena.getObjectByName("LongArm");
-            SupportJoint = cena.getObjectByName("SupportJoint");
-        }
-    });
-    
-    Abajur = cena.getObjectByName("Abajur");
-    SupportJointHolder = cena.getObjectByName("SupportJointHolder");
-    CircleJoint = cena.getObjectByName("CircleJoint");
-    suporte = cena.getObjectByName("Support");
+            if (soloObj) soloObj.material = transparentMaterial;
 
-    const d = 100;
-    // Light Configuration
-    const ponto_luminoso = cena.getObjectByName("Point");
-    const cone_luminoso = cena.getObjectByName("Spot");
-    ponto_luminoso.intensity = 300;
-    ponto_luminoso.distance = 1.25 * 1000;
-    cone_luminoso.intensity = 0;
-    cone_luminoso.distance = 10;
-    ponto_luminoso.scale.set(0.5, 0.5, 0.5);
-    ponto_luminoso.color = cone_luminoso.color = cor_default;
-    if (!/Mobi|Android/i.test(navigator.userAgent)) {
-        ponto_luminoso.castShadow = true;
-        cone_luminoso.castShadow = true;
-    } else {
-        ponto_luminoso.castShadow = false;
-        cone_luminoso.castShadow = false;
-    }
+            if (soloObj && baseObj) {
+                AbajurJoint = cena.getObjectByName("AbajurJoint");
+                ArmToAbajurJoint = cena.getObjectByName("ArmToAbajurJoint");
+                ShortArm = cena.getObjectByName("ShortArm");
+                LongArm = cena.getObjectByName("LongArm");
+                SupportJoint = cena.getObjectByName("SupportJoint");
+            }
+        });
 
-    const ponto_lum_helper = new THREE.PointLightHelper(ponto_luminoso);
-    cena.add(ponto_lum_helper);
+        Abajur = cena.getObjectByName("Abajur");
+        SupportJointHolder = cena.getObjectByName("SupportJointHolder");
+        CircleJoint = cena.getObjectByName("CircleJoint");
+        suporte = cena.getObjectByName("Support");
 
-    ponto_luminoso.shadow.mapSize.width = 256;
-    ponto_luminoso.shadow.mapSize.height = 256;
-    ponto_luminoso.shadow.bias = -0.001;
-
-    ponto_luminoso.shadow.camera.near = 0.5;
-    ponto_luminoso.shadow.camera.far = 500;
-    ponto_luminoso.shadow.camera.left = -d;
-    ponto_luminoso.shadow.camera.right = d;
-    ponto_luminoso.shadow.camera.top = d;
-    ponto_luminoso.shadow.camera.bottom = -d;
-
-
-    // Configure Lamps
-    lampada_cilindrica = cena.getObjectByName("C_LightBulb");
-    lampada_esferica = cena.getObjectByName("S_LightBulb");
-    lampada_esferica.visible = false;
-    lampada_cilindrica.children[0].material.emissive = cor_default;
-
-    WoodMaterial = cena.getObjectByName("WoodMaterial").material;
-    WoodMaterial.emissive = new THREE.Color(0x8b4513);
-    WoodMaterial.emissiveIntensity = .2;
-
-    MarbleMaterial = cena.getObjectByName("MarbleMaterial").material;
-    MarbleMaterial.emissive = new THREE.Color(0xffffff);
-    MarbleMaterial.emissiveIntensity = .2;
-
-    let water = cena.getObjectByName("water");
-    water.material = new THREE.MeshBasicMaterial({
-        color: 0x57a8bd,
-        opacity: 0.3,
-        transparent: true,
-    });
-
-    function setupAnimation(name, delay, speed) {
-        let animation = THREE.AnimationClip.findByName(gltf.animations, name);
-        if (!animation) {
-            console.warn("Couldn't find animation: " + name);
-            return;
-        }
-        let clip = animator.clipAction(animation);
-        if (!clip) {
-            console.warn("Couldn't create clip: " + name);
-            return;
-        }
-
-        if (name === "kelp") {
-            clip.setLoop(THREE.LoopPingPong);
+        const d = 100;
+        // Light Configuration
+        const ponto_luminoso = cena.getObjectByName("Point");
+        const cone_luminoso = cena.getObjectByName("Spot");
+        ponto_luminoso.intensity = 300;
+        ponto_luminoso.distance = 1.25 * 1000;
+        cone_luminoso.intensity = 0;
+        cone_luminoso.distance = 10;
+        ponto_luminoso.scale.set(0.5, 0.5, 0.5);
+        ponto_luminoso.color = cone_luminoso.color = cor_default;
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            ponto_luminoso.castShadow = true;
+            cone_luminoso.castShadow = true;
         } else {
-            clip.setLoop(THREE.LoopRepeat);
+            ponto_luminoso.castShadow = false;
+            cone_luminoso.castShadow = false;
         }
 
-        clip.startAt(delay);
-        clip.timeScale = speed;
-        clip.play();
-    }
+        const ponto_lum_helper = new THREE.PointLightHelper(ponto_luminoso);
+        cena.add(ponto_lum_helper);
+
+        ponto_luminoso.shadow.mapSize.width = 256;
+        ponto_luminoso.shadow.mapSize.height = 256;
+        ponto_luminoso.shadow.bias = -0.001;
+
+        ponto_luminoso.shadow.camera.near = 0.5;
+        ponto_luminoso.shadow.camera.far = 500;
+        ponto_luminoso.shadow.camera.left = -d;
+        ponto_luminoso.shadow.camera.right = d;
+        ponto_luminoso.shadow.camera.top = d;
+        ponto_luminoso.shadow.camera.bottom = -d;
 
 
-    if (!/Mobi|Android/i.test(navigator.userAgent)) {
-        for (let i = 0; i <= 10; i++) {
-            setupAnimation("kelp" + i, Math.random() * 2, .1 + Math.random() * .5);
-            setupAnimation("fish" + i, Math.random() * 2, .1 + Math.random() * .3);
+        // Configure Lamps
+        lampada_cilindrica = cena.getObjectByName("C_LightBulb");
+        lampada_esferica = cena.getObjectByName("S_LightBulb");
+        lampada_esferica.visible = false;
+        lampada_cilindrica.children[0].material.emissive = cor_default;
+
+        WoodMaterial = cena.getObjectByName("WoodMaterial").material;
+        WoodMaterial.emissive = new THREE.Color(0x8b4513);
+        WoodMaterial.emissiveIntensity = .2;
+
+        MarbleMaterial = cena.getObjectByName("MarbleMaterial").material;
+        MarbleMaterial.emissive = new THREE.Color(0xffffff);
+        MarbleMaterial.emissiveIntensity = .2;
+
+        let water = cena.getObjectByName("water");
+        water.material = new THREE.MeshBasicMaterial({
+            color: 0x57a8bd,
+            opacity: 0.3,
+            transparent: true,
+        });
+
+        function setupAnimation(name, delay, speed) {
+            let animation = THREE.AnimationClip.findByName(gltf.animations, name);
+            if (!animation) {
+                console.warn("Couldn't find animation: " + name);
+                return;
+            }
+            let clip = animator.clipAction(animation);
+            if (!clip) {
+                console.warn("Couldn't create clip: " + name);
+                return;
+            }
+
+            if (name === "kelp") {
+                clip.setLoop(THREE.LoopPingPong);
+            } else {
+                clip.setLoop(THREE.LoopRepeat);
+            }
+
+            clip.startAt(delay);
+            clip.timeScale = speed;
+            clip.play();
         }
-    }
 
-    setSoloObjectsPosition();
-    updateSliders();
-    updateRotation();
-});
+
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            for (let i = 0; i <= 10; i++) {
+                setupAnimation("kelp" + i, Math.random() * 2, .1 + Math.random() * .5);
+                setupAnimation("fish" + i, Math.random() * 2, .1 + Math.random() * .3);
+            }
+        }
+
+        setSoloObjectsPosition();
+        updateSliders();
+        updateRotation();
+
+        // Hide the loading spinner
+        loadingSpinner.style.display = 'none';
+    } catch (error) {
+        loadingSpinner.innerHTML = 'Erro ao carregar o modelo, por favor recarregue a página.';
+        loadingSpinner.className += ' text-danger';
+        console.error('Error loading model:', error);
+    }
+}
+
+init().then(r => console.log("Model loaded successfully!")).catch(e => console.error("Error loading model:", e));
 
 function setSoloObjectsPosition() {
     Objects.forEach((name) => {
