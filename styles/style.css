@@ -88,11 +88,12 @@ body {
         border-radius: 0 0 17px 17px !important;
     }
 
-    .page-center{
+    .page-center {
         left: 50% !important;
         top: 50% !important;
     }
-    .page-center.videoContainer{
+
+    .page-center.videoContainer {
         left: 50% !important;
         top: 80% !important;
     }
@@ -536,27 +537,34 @@ canvas {
 
 .floatingBtn {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px);
     color: white;
     border-radius: 50px;
-    padding: 15px 15px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background 0.3s;
     user-select: none;
     cursor: pointer;
+    outline: 0;
+    border: 0;
 }
 
 .floatingBtn:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .floatingBtn.active {
     background: rgba(0, 0, 0, 0.3);
     color: dodgerblue;
+}
+
+#orbitBtn {
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 15px !important;
 }
 
 .artigoCardContainer a {
@@ -711,6 +719,7 @@ footer .terms {
 /* CSS copied from laredoute.pt with some simplifications & color change */
 footer {
     display: block;
+
     .sr-only {
         position: absolute;
         width: 1px;
@@ -1826,11 +1835,12 @@ footer {
         opacity: 1;
     }
 }
-.footer-column{
+
+.footer-column {
     list-style: none !important;
 }
 
-.footer-column button{
+.footer-column button {
     background: none;
     border: none;
     color: black;

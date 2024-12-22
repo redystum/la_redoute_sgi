@@ -1,7 +1,7 @@
 .sliderDiv {
     display: none;
     position: absolute;
-    bottom: 45px;
+    bottom: 15px;
     right: 0;
     padding: 0 25px;
     user-select: none;
@@ -11,10 +11,11 @@
         align-items: center;
         justify-content: center;
         transition: background 0.3s;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.2);
         color: white;
         border-radius: 15px;
         padding: 5px 10px;
+        backdrop-filter: blur(3px);
     }
 
     input {

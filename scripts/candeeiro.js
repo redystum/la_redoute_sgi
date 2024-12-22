@@ -2,11 +2,11 @@
 // noinspection ES6CheckImport
 
 import * as THREE from "three";
-import {OrbitControls} from "three/addons/controls/OrbitControls.js";
-import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
-import {EffectComposer} from "three/addons/postprocessing/EffectComposer.js";
-import {RenderPass} from "three/addons/postprocessing/RenderPass.js";
-import {OutlinePass} from "three/addons/postprocessing/OutlinePass.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { OutlinePass } from "three/addons/postprocessing/OutlinePass.js";
 
 // Model Meshes
 let suporte;
@@ -71,7 +71,7 @@ window.renderer = renderer;
 const geometry = new THREE.PlaneGeometry(10000, 10000);
 geometry.rotateX(-Math.PI / 2);
 geometry.translate(0, -1.63, 0);
-const material = new THREE.ShadowMaterial({opacity: 0.5});
+const material = new THREE.ShadowMaterial({ opacity: 0.5 });
 const plane = new THREE.Mesh(geometry, material);
 plane.receiveShadow = true;
 cena.add(plane);
@@ -132,52 +132,8 @@ const Objects = [
     "SupportJointHolder", // the same for this
     "CircleJoint", // this
     "SupportJoint", // and this one too
-    // "Support",
+    "Support",
 ];
-
-function onPointerClick(event) {
-    // Ensure the click is within the Three.js canvas
-    if (event.target !== threeCanvas) {
-        return;
-    }
-
-    let rect = threeCanvas.getBoundingClientRect();
-    mouse.x = ((event.clientX - rect.left) / (rect.right - rect.left)) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
-    console.log("X:" + mouse.x, "Y:" + mouse.y);
-
-    raycaster.setFromCamera(mouse, camara);
-    const intersects = raycaster.intersectObjects(cena.children, true);
-
-    document.querySelectorAll(".sliderDiv").forEach((div) => {
-        div.className = "sliderDiv";
-    });
-
-    if (intersects.length > 0) {
-        let clickedMesh = intersects[0].object;
-        if (!clickedMesh.name.endsWith("Solo")) {
-            outlinePass.selectedObjects = [];
-            return;
-        }
-        updateSliders();
-        if (clickedMesh.name === "CircleJointSolo" || clickedMesh.name === "SupportJointSolo" || clickedMesh.name === "SupportJointHolderSolo") {
-            outlinePass.selectedObjects = [cena.getObjectByName("CircleJointSolo"), cena.getObjectByName("SupportJointSolo")];
-            document.getElementById("SupportJointSliderDiv").className = "sliderDiv active";
-        } else if (clickedMesh.name === "AbajurSolo" || clickedMesh.name === "AbajurJointSolo") {
-            outlinePass.selectedObjects = [cena.getObjectByName("AbajurSolo"), cena.getObjectByName("AbajurJointSolo")];
-            document.getElementById("AbajurJointSliderDiv").className = "sliderDiv active";
-        } else {
-            outlinePass.selectedObjects = [clickedMesh];
-            let sliderDiv = document.getElementById(clickedMesh.name.replace("Solo", "SliderDiv"));
-            if (sliderDiv) {
-                sliderDiv.className = "sliderDiv active";
-            }
-        }
-        console.log("Outlined mesh:", clickedMesh.name);
-    } else {
-        outlinePass.selectedObjects = [];
-    }
-}
 
 // Transparent Material
 let transparentMaterial = new THREE.MeshBasicMaterial({
@@ -203,6 +159,7 @@ async function init() {
     let loadingSpinner = document.getElementsByClassName('loading-spinner')[0];
     try {
         const path = !/Mobi|Android/i.test(navigator.userAgent) ? './gltf/sofa_aplique.gltf' : './gltf/sofa_aplique_mobile.gltf';
+
         // desta forma evita dar freeze na página ao carregar o modelo
         const gltf = await loadModel(path);
 
@@ -327,6 +284,7 @@ async function init() {
 
         // Hide the loading spinner
         loadingSpinner.style.display = 'none';
+        document.getElementById("floatingButtons").style.display = "block";
     } catch (error) {
         loadingSpinner.innerHTML = 'Erro ao carregar o modelo, por favor recarregue a página.';
         loadingSpinner.className += ' text-danger';
@@ -335,6 +293,54 @@ async function init() {
 }
 
 init().then(r => console.log("Model loaded successfully!")).catch(e => console.error("Error loading model:", e));
+
+function onPointerClick(event) {
+    // Ensure the click is within the Three.js canvas
+    if (event.target !== threeCanvas) {
+        return;
+    }
+
+    let rect = threeCanvas.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / (rect.right - rect.left)) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
+    console.log("X:" + mouse.x, "Y:" + mouse.y);
+
+    raycaster.setFromCamera(mouse, camara);
+    const intersects = raycaster.intersectObjects(cena.children, true);
+
+    document.querySelectorAll(".sliderDiv").forEach((div) => {
+        div.className = "sliderDiv";
+    });
+
+    document.getElementById("floatingButtons").style.display = "block";
+
+    if (intersects.length > 0) {
+        let clickedMesh = intersects[0].object;
+        if (!clickedMesh.name.endsWith("Solo")) {
+            outlinePass.selectedObjects = [];
+            return;
+        }
+        document.getElementById("floatingButtons").style.display = "none";
+        updateSliders();
+        if (clickedMesh.name === "CircleJointSolo" || clickedMesh.name === "SupportJointSolo" || clickedMesh.name === "SupportJointHolderSolo") {
+            outlinePass.selectedObjects = [cena.getObjectByName("CircleJointSolo"), cena.getObjectByName("SupportJointSolo")];
+            document.getElementById("SupportJointSliderDiv").className = "sliderDiv active";
+        } else if (clickedMesh.name === "AbajurSolo" || clickedMesh.name === "AbajurJointSolo") {
+            outlinePass.selectedObjects = [cena.getObjectByName("AbajurSolo"), cena.getObjectByName("AbajurJointSolo")];
+            document.getElementById("AbajurJointSliderDiv").className = "sliderDiv active";
+        } else {
+            outlinePass.selectedObjects = [clickedMesh];
+            let sliderDiv = document.getElementById(clickedMesh.name.replace("Solo", "SliderDiv"));
+            if (sliderDiv) {
+                sliderDiv.className = "sliderDiv active";
+            }
+        }
+        console.log("Outlined mesh:", clickedMesh.name);
+    } else {
+        outlinePass.selectedObjects = [];
+    }
+}
+
 
 function setSoloObjectsPosition() {
     Objects.forEach((name) => {
@@ -354,7 +360,6 @@ function setSoloObjectsPosition() {
     });
 }
 
-// Update rotation function
 function updateRotation() {
     console.log("Updating rotation...");
     const abajurRotationZ = THREE.MathUtils.degToRad(abajurJointSlider.value);
@@ -398,6 +403,58 @@ shortArmSlider.addEventListener("input", updateRotation);
 longArmSlider.addEventListener("input", updateRotation);
 supportJointSlider.addEventListener("input", updateRotation);
 
+let showObjState = true;
+let darkModeState = true;
+let notHide = [
+    'AbajurMesh',
+    'AbajurMesh_1',
+    'wall'
+]
+document.getElementById("removeObjectsBtn").addEventListener("click", function () {
+    if (showObjState) {
+        cena.traverse((child) => {
+            if (child.isMesh &&
+                !Objects.includes(child.name) &&
+                !Objects.some(obj => child.name === obj + "Solo") &&
+                !notHide.includes(child.name)) {
+                console.log(child.name);
+                child.visible = false;
+            }
+        });
+        controls.minDistance = 2;
+        controls.maxPolarAngle = Math.PI;
+        controls.minAzimuthAngle = -Math.PI / 1.8;
+
+        showObjState = false;
+    } else {
+        cena.traverse((child) => {
+            if (child.isMesh) {
+                child.visible = true;
+            }
+        });
+
+        controls.minDistance = 10;
+        controls.maxPolarAngle = Math.PI / 1.8;
+        controls.minAzimuthAngle = -Math.PI / 17;
+
+        showObjState = true;
+    }
+});
+
+document.getElementById("toggleDayNightBtn").addEventListener("click", function () {
+    if (darkModeState) {
+        renderer.setClearColor(0xFFFFFF, 1);
+        darkModeState = false;
+    } else {
+        renderer.setClearColor(0x2a2a35, 1);
+        darkModeState = true;
+    }
+});
+
+document.getElementById("playBtn").addEventListener("click", function () {
+    
+});
+
 // Animation Loop
 {
     let delta = 0;
@@ -420,8 +477,8 @@ supportJointSlider.addEventListener("input", updateRotation);
     animar();
 }
 
-const blackMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
-const whiteMaterial = new THREE.MeshBasicMaterial({color: 0xf1f1f1});
+const blackMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+const whiteMaterial = new THREE.MeshBasicMaterial({ color: 0xf1f1f1 });
 
 $("#btn_abajur_black").click(function () {
     if (Abajur) {
