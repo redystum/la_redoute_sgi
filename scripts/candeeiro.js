@@ -2,11 +2,11 @@
 // noinspection ES6CheckImport
 
 import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
-import { OutlinePass } from "three/addons/postprocessing/OutlinePass.js";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {EffectComposer} from "three/addons/postprocessing/EffectComposer.js";
+import {RenderPass} from "three/addons/postprocessing/RenderPass.js";
+import {OutlinePass} from "three/addons/postprocessing/OutlinePass.js";
 
 // Model Meshes
 let suporte;
@@ -71,7 +71,7 @@ window.renderer = renderer;
 const geometry = new THREE.PlaneGeometry(10000, 10000);
 geometry.rotateX(-Math.PI / 2);
 geometry.translate(0, -1.63, 0);
-const material = new THREE.ShadowMaterial({ opacity: 0.5 });
+const material = new THREE.ShadowMaterial({opacity: 0.5});
 const plane = new THREE.Mesh(geometry, material);
 plane.receiveShadow = true;
 cena.add(plane);
@@ -135,6 +135,8 @@ const Objects = [
     "Support",
 ];
 
+let animations = [];
+
 // Transparent Material
 let transparentMaterial = new THREE.MeshBasicMaterial({
     color: 0x000000,
@@ -153,7 +155,9 @@ async function loadModel(path) {
         });
     });
 }
+
 let animator = new THREE.AnimationMixer(cena);
+let gltf;
 
 async function init() {
     let loadingSpinner = document.getElementsByClassName('loading-spinner')[0];
@@ -161,7 +165,7 @@ async function init() {
         const path = !/Mobi|Android/i.test(navigator.userAgent) ? './gltf/sofa_aplique.gltf' : './gltf/sofa_aplique_mobile.gltf';
 
         // desta forma evita dar freeze na página ao carregar o modelo
-        const gltf = await loadModel(path);
+        gltf = await loadModel(path);
 
         gltf.scene.traverse((child) => {
             if (child.isMesh) {
@@ -210,9 +214,6 @@ async function init() {
             ponto_luminoso.castShadow = false;
             cone_luminoso.castShadow = false;
         }
-
-        const ponto_lum_helper = new THREE.PointLightHelper(ponto_luminoso);
-        cena.add(ponto_lum_helper);
 
         ponto_luminoso.shadow.mapSize.width = 256;
         ponto_luminoso.shadow.mapSize.height = 256;
@@ -281,6 +282,14 @@ async function init() {
         setSoloObjectsPosition();
         updateSliders();
         updateRotation();
+
+        animations = [
+            animator.clipAction(THREE.AnimationClip.findByName(gltf.animations, "LongArmAction")),
+            animator.clipAction(THREE.AnimationClip.findByName(gltf.animations, "ShortArmAction")),
+            animator.clipAction(THREE.AnimationClip.findByName(gltf.animations, "ArmToAbajurJointAction")),
+            animator.clipAction(THREE.AnimationClip.findByName(gltf.animations, "AbajurJointAction")),
+            animator.clipAction(THREE.AnimationClip.findByName(gltf.animations, "SupportJointAction")),
+        ]
 
         // Hide the loading spinner
         loadingSpinner.style.display = 'none';
@@ -405,10 +414,13 @@ supportJointSlider.addEventListener("input", updateRotation);
 
 let showObjState = true;
 let darkModeState = true;
+let isPlaying = false;
 let notHide = [
     'AbajurMesh',
     'AbajurMesh_1',
-    'wall'
+    'wall',
+    'Cube004',
+    'Cube004_1  ',
 ]
 document.getElementById("removeObjectsBtn").addEventListener("click", function () {
     if (showObjState) {
@@ -426,6 +438,7 @@ document.getElementById("removeObjectsBtn").addEventListener("click", function (
         controls.minAzimuthAngle = -Math.PI / 1.8;
 
         showObjState = false;
+        document.getElementById("removeObjectsBtn").getElementsByTagName("span")[0].innerHTML = "deployed_code";
     } else {
         cena.traverse((child) => {
             if (child.isMesh) {
@@ -438,21 +451,52 @@ document.getElementById("removeObjectsBtn").addEventListener("click", function (
         controls.minAzimuthAngle = -Math.PI / 17;
 
         showObjState = true;
+        document.getElementById("removeObjectsBtn").getElementsByTagName("span")[0].innerHTML = "view_in_ar_off";
     }
 });
 
 document.getElementById("toggleDayNightBtn").addEventListener("click", function () {
     if (darkModeState) {
         renderer.setClearColor(0xFFFFFF, 1);
+        luzAmbiente.intensity = 3;
         darkModeState = false;
+        document.getElementById("toggleDayNightBtn").getElementsByTagName("span")[0].innerHTML = "dark_mode";
     } else {
         renderer.setClearColor(0x2a2a35, 1);
+        luzAmbiente.intensity = 1;
+        cena.children.forEach((child) => {
+            if (child.isLight && child.type === "DirectionalLight") {
+                cena.remove(child);
+            }
+        });
         darkModeState = true;
+        document.getElementById("toggleDayNightBtn").getElementsByTagName("span")[0].innerHTML = "light_mode";
     }
 });
 
+let interval = null;
 document.getElementById("playBtn").addEventListener("click", function () {
-    
+    if (isPlaying) {
+        isPlaying = false;
+        animations.forEach((action) => {
+            action.paused = true;
+        });
+        clearInterval(interval);
+        document.getElementById("playBtn").getElementsByTagName("span")[0].innerHTML = "play_arrow";
+    } else {
+        animations.forEach((action) => {
+            action.paused = false;
+            action.setLoop(THREE.LoopOnce);
+            action.reset();
+            action.play();
+        });
+        interval = setTimeout(() => {
+            document.getElementById("playBtn").getElementsByTagName("span")[0].innerHTML = "play_arrow";
+            isPlaying = false;
+        }, 10000); // 10 seconds
+        isPlaying = true;
+        document.getElementById("playBtn").getElementsByTagName("span")[0].innerHTML = "stop";
+    }
 });
 
 // Animation Loop
@@ -477,8 +521,8 @@ document.getElementById("playBtn").addEventListener("click", function () {
     animar();
 }
 
-const blackMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-const whiteMaterial = new THREE.MeshBasicMaterial({ color: 0xf1f1f1 });
+const blackMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
+const whiteMaterial = new THREE.MeshBasicMaterial({color: 0xf1f1f1});
 
 $("#btn_abajur_black").click(function () {
     if (Abajur) {

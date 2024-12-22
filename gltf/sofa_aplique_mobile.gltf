@@ -5719,7 +5719,7 @@
 					}
 				}
 			],
-			"name":"ArmToAbajurJointAction.001",
+			"name":"ArmToAbajurJointAction",
 			"samplers":[
 				{
 					"input":265,
