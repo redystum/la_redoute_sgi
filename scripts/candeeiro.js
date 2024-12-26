@@ -48,6 +48,7 @@ window.cena = cena;
 
 // Add Ambient Light
 const luzAmbiente = new THREE.AmbientLight(0xffffff, 1)
+luzAmbiente.intensity = 3;
 cena.add(luzAmbiente)
 
 // Renderer Setup
@@ -60,8 +61,7 @@ let renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(width, height);
 renderer.setPixelRatio(1.2);
-// renderer.setClearColor(0x5f5f5f, 1);
-renderer.setClearColor(0x2a2a35, 1);
+renderer.setClearColor(0xFFFFFF, 1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
@@ -413,14 +413,14 @@ longArmSlider.addEventListener("input", updateRotation);
 supportJointSlider.addEventListener("input", updateRotation);
 
 let showObjState = true;
-let darkModeState = true;
+let darkModeState = false;
 let isPlaying = false;
 let notHide = [
     'AbajurMesh',
     'AbajurMesh_1',
     'wall',
     'Cube004',
-    'Cube004_1  ',
+    'Cube004_1',
 ]
 document.getElementById("removeObjectsBtn").addEventListener("click", function () {
     if (showObjState) {
@@ -529,8 +529,8 @@ $("#btn_abajur_black").click(function () {
         $(".abajurSection").removeClass("active");
         $("#btn_abajur_black").addClass("active");
         $("#abajurHeading span").text("Preto");
+        Abajur.material = blackMaterial;
         if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
-            console.log(Abajur.children[0]);
             Abajur.children[0].material = blackMaterial;
         }
     }
@@ -543,7 +543,6 @@ $("#btn_abajur_white").click(function () {
         $("#abajurHeading span").text("Branco");
         Abajur.material = whiteMaterial;
         if (Abajur.children.length > 0 && Abajur.children[0].isMesh) {
-            console.log(Abajur.children[0]);
             Abajur.children[0].material = whiteMaterial;
         }
     }

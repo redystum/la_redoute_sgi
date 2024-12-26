@@ -195,7 +195,7 @@ function luzes() {
 luzes();
 
 window.addEventListener("resize", onWindowResize);
-let height = document.getElementById("three-canvas-container").clientHeight;
+let height = threeContainer.clientHeight;
 
 function onWindowResize() {
     let width = threeContainer.clientWidth;
