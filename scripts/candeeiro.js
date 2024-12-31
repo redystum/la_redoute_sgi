@@ -524,7 +524,19 @@ document.getElementById("playBtn").addEventListener("click", function () {
 const blackMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
 const whiteMaterial = new THREE.MeshBasicMaterial({color: 0xf1f1f1});
 
+function changeMaterial(part, material) {
+    const partImages = document.getElementsByClassName(part + "Image1");
+    for (let i = 0; i < partImages.length; i++) {
+        partImages[i].src = `./assets/renders/parts/${part}/${material}.png`;
+    }
+    const partImages2 = document.getElementsByClassName(part + "Image2");
+    for (let i = 0; i < partImages2.length; i++) {
+        partImages2[i].src = `./assets/renders/parts2/${part}/${material}.png`;
+    }
+}
+
 $("#btn_abajur_black").click(function () {
+    changeMaterial("abajur", "black");
     if (Abajur) {
         $(".abajurSection").removeClass("active");
         $("#btn_abajur_black").addClass("active");
@@ -537,6 +549,7 @@ $("#btn_abajur_black").click(function () {
 });
 
 $("#btn_abajur_white").click(function () {
+    changeMaterial("abajur", "white");
     if (Abajur) {
         $(".abajurSection").removeClass("active");
         $("#btn_abajur_white").addClass("active");
@@ -549,6 +562,7 @@ $("#btn_abajur_white").click(function () {
 });
 
 $("#btn_abajur_wood").click(function () {
+    changeMaterial("abajur", "wood");
     if (Abajur) {
         $(".abajurSection").removeClass("active");
         $("#btn_abajur_wood").addClass("active");
@@ -561,6 +575,7 @@ $("#btn_abajur_wood").click(function () {
 });
 
 $("#btn_abajur_marble").click(function () {
+    changeMaterial("abajur", "marble");
     if (Abajur) {
         $(".abajurSection").removeClass("active");
         $("#btn_abajur_marble").addClass("active");
@@ -573,6 +588,7 @@ $("#btn_abajur_marble").click(function () {
 });
 
 $("#btn_arms_black").click(function () {
+    changeMaterial("arms", "black");
     if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
         $(".armsSection").removeClass("active");
         $("#btn_arms_black").addClass("active");
@@ -587,6 +603,7 @@ $("#btn_arms_black").click(function () {
 });
 
 $("#btn_arms_white").click(function () {
+    changeMaterial("arms", "white");
     if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
         $(".armsSection").removeClass("active");
         $("#btn_arms_white").addClass("active");
@@ -601,6 +618,7 @@ $("#btn_arms_white").click(function () {
 });
 
 $("#btn_arms_wood").click(function () {
+    changeMaterial("arms", "wood");
     if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
         $(".armsSection").removeClass("active");
         $("#btn_arms_wood").addClass("active");
@@ -615,6 +633,7 @@ $("#btn_arms_wood").click(function () {
 });
 
 $("#btn_arms_marble").click(function () {
+    changeMaterial("arms", "marble");
     if (ShortArm && LongArm && CircleJoint && SupportJoint && ArmToAbajurJoint && AbajurJoint) {
         $(".armsSection").removeClass("active");
         $("#btn_arms_marble").addClass("active");
@@ -629,6 +648,7 @@ $("#btn_arms_marble").click(function () {
 });
 
 $("#btn_support_black").click(function () {
+    changeMaterial("support", "black");
     if (suporte && SupportJointHolder) {
         $(".supportSection").removeClass("active");
         $("#btn_support_black").addClass("active");
@@ -639,6 +659,7 @@ $("#btn_support_black").click(function () {
 });
 
 $("#btn_support_white").click(function () {
+    changeMaterial("support", "white");
     if (suporte && SupportJointHolder) {
         $(".supportSection").removeClass("active");
         $("#btn_support_white").addClass("active");
@@ -649,6 +670,7 @@ $("#btn_support_white").click(function () {
 });
 
 $("#btn_support_wood").click(function () {
+    changeMaterial("support", "wood");
     if (suporte && SupportJointHolder) {
         $(".supportSection").removeClass("active");
         $("#btn_support_wood").addClass("active");
@@ -659,6 +681,7 @@ $("#btn_support_wood").click(function () {
 });
 
 $("#btn_support_marble").click(function () {
+    changeMaterial("support", "marble");
     if (suporte && SupportJointHolder) {
         $(".supportSection").removeClass("active");
         $("#btn_support_marble").addClass("active");
